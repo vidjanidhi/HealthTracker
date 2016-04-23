@@ -37,53 +37,248 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/ib_weight"
+                        style="@style/Home_ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="@drawable/border"
-                        android:paddingBottom="25dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="20dp"
                         android:src="@drawable/demo" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/tv_weight"
+                        style="@style/Home_TitleText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:background="#03a9f9"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Weight"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold" />
-
+                        android:text="Weight" />
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/imageButton1"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:src="@drawable/demo" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
+                    <ImageButton
+                        android:id="@+id/ib_glucose"
+                        style="@style/Home_ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_glucose"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Glucose" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:src="@drawable/demo" />
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_bp"
+                        style="@style/Home_ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_bp"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="B.P" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_colesterol"
+                        style="@style/Home_ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_colesterol"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Colesterol" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_thyroid"
+                        style="@style/Home_ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_thyroid"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Thyroid" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_diary"
+                        style="@style/Home_ImageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_diary"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Diary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_chart"
+                        style="@style/Home_ImageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_chart"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Chart" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_logs"
+                        style="@style/Home_ImageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_logs"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lsogs" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ib_statistics"
+                        style="@style/Home_ImageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_statistics"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Statistics" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    4#<ImageButton
+                        android:id="@+id/ib_manage"
+                        style="@style/Home_ImageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/demo" />
+
+                    <TextView
+                        android:id="@+id/tv_manage"
+                        style="@style/Home_TitleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Manage" />
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
 
     </ScrollView>
 </RelativeLayout>
