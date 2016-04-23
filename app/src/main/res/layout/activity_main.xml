@@ -101,52 +101,64 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <ImageButton
-                        android:id="@+id/ib_colesterol"
-                        style="@style/Home_ImageButton"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/demo" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_colesterol"
-                        style="@style/Home_TitleText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Colesterol" />
+                        <ImageButton
+                            android:id="@+id/ib_colesterol"
+                            style="@style/Home_ImageButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/demo" />
+
+                        <TextView
+                            android:id="@+id/tv_colesterol"
+                            style="@style/Home_TitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Colesterol" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <ImageButton
-                        android:id="@+id/ib_thyroid"
-                        style="@style/Home_ImageButton"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/demo" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_thyroid"
-                        style="@style/Home_TitleText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Thyroid" />
+                        <ImageButton
+                            android:id="@+id/ib_thyroid"
+                            style="@style/Home_ImageButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/demo" />
+
+                        <TextView
+                            android:id="@+id/tv_thyroid"
+                            style="@style/Home_TitleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Thyroid" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -229,14 +241,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -258,11 +269,10 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    4#<ImageButton
+                    <ImageButton
                         android:id="@+id/ib_manage"
                         style="@style/Home_ImageButton2"
                         android:layout_width="wrap_content"
