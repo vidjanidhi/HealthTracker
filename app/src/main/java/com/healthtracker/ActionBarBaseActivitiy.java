@@ -1,6 +1,5 @@
 package com.healthtracker;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -10,29 +9,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AutoCompleteTextView;
 
 import com.healthtracker.component.MyFontTextView;
 
-/**
- * @author Elluminati elluminati.in
- */
-@SuppressLint("NewApi")
 abstract public class ActionBarBaseActivitiy extends AppCompatActivity {
 
     public ActionBar actionBar;
     public MyFontTextView tvTitle;
-    public AutoCompleteTextView etEnterSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // SaveLog.getInstance(this);
-        actionBar = getSupportActionBar();
+                actionBar = getSupportActionBar();
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        //actionBar.setCustomView(R.layout.custom_action_bar);
         LayoutInflater inflater = (LayoutInflater) actionBar.getThemedContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         View customActionBarView = inflater.inflate(R.layout.custom_action_bar,
                 null);
+        actionBar.setDisplayShowCustomEnabled(true);
         tvTitle = (MyFontTextView) customActionBarView
                 .findViewById(R.id.tvTitle);
 
@@ -57,6 +53,7 @@ abstract public class ActionBarBaseActivitiy extends AppCompatActivity {
             window.setStatusBarColor(color);
         }
     }
+
     public void setTitle(String str) {
         tvTitle.setText(str);
     }
