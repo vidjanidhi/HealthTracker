@@ -14,11 +14,9 @@
         android:layout_height="match_parent"
         android:id="@+id/scrollView"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="299dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="211dp"
-        android:layout_marginEnd="211dp"
-        android:layout_marginBottom="299dp">
+        android:layout_alignParentEnd="true">
 
         <LinearLayout
             android:orientation="vertical"
