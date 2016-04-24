@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HealthTracker</string>
+
+    <string-array name="android_dropdown_arrays">
+        <item>Choose a User</item>
+        <item>Harvi</item>
+        <item>Nidhi</item>
+        <item>Raghav</item>
+        <item>Bipin</item>
+    </string-array>
 </resources>
