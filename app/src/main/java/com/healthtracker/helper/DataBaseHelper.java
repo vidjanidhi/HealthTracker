@@ -22,6 +22,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_WEIGHT = "weight";
     private static final String TABLE_GLUCOSE = "fat";
     private static final String TABLE_B_P = "abdomen";
+
     private static final String TABLE_CHOLESEROL = "cholesterol";
     private static final String TABLE_THYROID = "thyroid";
 
