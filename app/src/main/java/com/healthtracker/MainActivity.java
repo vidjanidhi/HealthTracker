@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
     private Spinner spinner1;
@@ -58,19 +54,8 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViews();
         setTitle("Health tracker");
-        List<String> list = new ArrayList<String>();
-        list.add("nidhi");
-        list.add("harvi");
-        list.add("raghav");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, list);
-
-        dataAdapter.setDropDownViewResource
-                (android.R.layout.simple_spinner_dropdown_item);
-
-        spinner1.setAdapter(dataAdapter);
+        findViews();
         spinner1.setOnItemSelectedListener(new ItemSelectedListener());
     }
 
@@ -100,13 +85,15 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
 
                 break;
             case R.id.ll_chart:
-
+                Intent intent2 = new Intent(this, ChartActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.ll_diary:
 
                 break;
             case R.id.ll_manage:
-
+                Intent intent3 = new Intent(this, ManageActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.ll_statistics:
 
