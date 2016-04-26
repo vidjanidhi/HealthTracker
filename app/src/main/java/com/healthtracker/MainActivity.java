@@ -54,7 +54,6 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Health tracker");
-        findViews();
         spinner1.setOnItemSelectedListener(new ItemSelectedListener());
     }
 
@@ -84,8 +83,7 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
 
                 break;
             case R.id.ll_chart:
-                Intent intent1 = new Intent(this, ChartActivity.class);
-                startActivity(intent1);
+
                 break;
             case R.id.ll_diary:
 

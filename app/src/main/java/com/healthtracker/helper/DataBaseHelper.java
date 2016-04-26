@@ -19,7 +19,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "healthTracker";
     //tables
     private static final String TABLE_USER = "user";
-    private static final String TABLE_WEIGHT = "weight";
+    private static final String TABLE_WEIGHT = "weight_fragment";
     private static final String TABLE_GLUCOSE = "fat";
     private static final String TABLE_B_P = "abdomen";
 
@@ -49,7 +49,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //CREATE WEIGHT
     private static final String KEY_ROWID = "rowid";
-    private static final String KEY_WEIGHT = "weight";
+    private static final String KEY_WEIGHT = "weight_fragment";
     private static final String KEY_FAT = "fat";
     private static final String KEY_ABDOMEN = "abdomen";
     private static final String KEY_WAIST = "waist";
