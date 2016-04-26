@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tv_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="Weight(lbs)"></com.healthtracker.component.MyFontTextView>
-
-        <com.healthtracker.component.MyFontEdittextView
-            android:id="@+id/et_weight"
-            style="@style/edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:maxEms="10"></com.healthtracker.component.MyFontEdittextView>
-    </LinearLayout>
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,84 +9,82 @@
         android:weightSum="2">
 
         <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tv_fat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="Fat(%)"></com.healthtracker.component.MyFontTextView>
-
-        <com.healthtracker.component.MyFontEdittextView
-            android:id="@+id/et_fat"
-            style="@style/edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"></com.healthtracker.component.MyFontEdittextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:weightSum="2">
-
-        <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tv_abdomen"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_hdl"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:padding="10dp"
-            android:text="Abdomen(inch)"></com.healthtracker.component.MyFontTextView>
+            android:text="HDL"></com.healthtracker.component.MyFontTextView>
 
         <com.healthtracker.component.MyFontEdittextView
-            android:id="@+id/et_abdomen"
+            android:id="@+id/et_hdl"
             style="@style/edittext"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_ldl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="LDL"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_ldl"
+            style="@style/edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="Total"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_total"
+            style="@style/edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_triglycerides"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="Triglycerides"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_triglycerides"
+            style="@style/edittext"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:weightSum="2">
-
-        <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tv_waist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:padding="10dp"
-            android:text="Waist(inch)"></com.healthtracker.component.MyFontTextView>
-
-        <com.healthtracker.component.MyFontEdittextView
-            android:id="@+id/et_waist"
-            style="@style/edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:weightSum="2">
-
-        <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tv_hip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:padding="10dp"
-            android:text="Hip(inch)"></com.healthtracker.component.MyFontTextView>
-
-        <com.healthtracker.component.MyFontEdittextView
-            android:id="@+id/et_hip"
-            style="@style/edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
-    </LinearLayout>
 </LinearLayout>

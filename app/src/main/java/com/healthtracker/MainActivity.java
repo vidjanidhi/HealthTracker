@@ -1,5 +1,6 @@
 package com.healthtracker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -77,20 +78,20 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_weight:
-                Intent intent = new Intent(this, AddDetailActivity.class);
-                startActivity(intent);
+                openAddDetailActivity(1,this);
                 break;
 
             case R.id.ll_glucose:
+                openAddDetailActivity(2, this);
                 break;
             case R.id.ll_bp:
-
+                openAddDetailActivity(3,this);
                 break;
             case R.id.ll_colestrol:
-
+                openAddDetailActivity(4,this);
                 break;
             case R.id.ll_thyroid:
-
+                openAddDetailActivity(5,this);
                 break;
             case R.id.ll_logs:
 
@@ -112,6 +113,11 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
                 break;
         }
     }
+    public void openAddDetailActivity(int fragment_id,Activity acct){
+        Intent intent = new Intent(acct, AddDetailActivity.class);
+        intent.putExtra("fragment_id",fragment_id);
+        startActivity(intent);
+    }
 
     public class ItemSelectedListener implements AdapterView.OnItemSelectedListener {
         //get strings of first item
@@ -127,6 +133,7 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
                 // Todo when item is selected by the user
             }
         }
+
 
         @Override
         public void onNothingSelected(AdapterView<?> arg) {
