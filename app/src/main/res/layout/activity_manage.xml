@@ -35,8 +35,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -60,8 +60,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -85,8 +85,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -110,8 +110,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -135,8 +135,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -160,8 +160,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -185,8 +185,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/border"
+            android:layout_margin="2dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
