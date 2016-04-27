@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_margin="10dp">
-            <ImageView
-                android:id="@+id/iv_weighdt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/charts" />
+            android:orientation="horizontal">
 
-            <com.healthtracker.component.MyTitleFontTextView
-                android:id="@+id/tv_weigdht"
-                style="@style/activity_main_text"
-                android:textSize="20sp"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_weight"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Charts" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_weight"
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weight" />
+
+                <com.healthtracker.component.MyFontTextView
+                    android:id="@+id/tv_weight"
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_glucose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iv_glucose"
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/glucose" />
+
+                <com.healthtracker.component.MyFontTextView
+                    android:id="@+id/tv_glucose"
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Glucose" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -44,369 +70,227 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view"
-                android:layout_width="0dp"
+
+            <LinearLayout
+                android:id="@+id/ll_bp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bp" />
+
+                <com.healthtracker.component.MyFontTextView
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B.P" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/colesterol" />
+
+                <com.healthtracker.component.MyFontTextView
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Colesterol" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/thyroid" />
+
+                <com.healthtracker.component.MyFontTextView
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thyroid" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_weight"
-                    android:layout_width="match_parent"
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/iv_weight"
-                        style="@style/activity_main_image"
+                        android:id="@+id/iv_weight135"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/weight" />
 
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_glucose"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
                     <ImageView
-                        android:id="@+id/iv_glucose"
-                        style="@style/activity_main_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/glucose" />
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_glucose"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Glucose" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view34"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_weight34"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <ImageView
-                        android:id="@+id/iv_weight34"
-                        style="@style/activity_main_image"
+                        android:id="@+id/iv_weighta135"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/bp" />
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight34"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="B.P" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view134"
-                android:layout_width="0dp"
+                <com.healthtracker.component.MyFontTextView
+                    android:id="@+id/tv_weight135"
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight+B.P" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_weight3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <LinearLayout
-                    android:id="@+id/ll_weight134"
-                    android:layout_width="match_parent"
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/iv_weight134"
-                        style="@style/activity_main_image"
+                        android:id="@+id/iv_weight1v35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/weight" />
+
+                    <ImageView
+                        android:id="@+id/iv_weightva135"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/glucose" />
+                </LinearLayout>
+
+                <com.healthtracker.component.MyFontTextView
+                    android:id="@+id/tv_weight3"
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight+Glucose" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_weight13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    style="@style/activity_main_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_weight3x5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/weight" />
+
+                    <ImageView
+                        android:id="@+id/iv_weighta35"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/colesterol" />
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight134"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Colesterol" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+
+                <com.healthtracker.component.MyFontTextView
+                    android:id="@+id/tv_weight13"
+                    style="@style/activity_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight+Colesterol" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:id="@+id/ll_weight_thyroid"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view35"
-                android:layout_width="match_parent"
+            <LinearLayout
+                style="@style/activity_main_image"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/ll_weight35"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:src="@drawable/weight" />
 
-                    <ImageView
-                        android:id="@+id/iv_weight35"
-                        style="@style/activity_main_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/thyroid" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/thyroid" />
+            </LinearLayout>
 
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight35"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thyroid" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
+            <com.healthtracker.component.MyFontTextView
+                style="@style/activity_main_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight+Thyroid" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view36"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_weight3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        style="@style/activity_main_image"
-                        android:gravity="center_horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_weight1v35"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/weight" />
-                        <ImageView
-                            android:id="@+id/iv_weightva135"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/glucose" />
-                    </LinearLayout>
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight3"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight+Glucose" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view13"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_weight13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        style="@style/activity_main_image"
-                        android:gravity="center_horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_weight3x5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/weight" />
-                        <ImageView
-                            android:id="@+id/iv_weighta35"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/colesterol" />
-                    </LinearLayout>
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight13"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight+Colesterol" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view361"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_weight31"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        style="@style/activity_main_image"
-                        android:gravity="center_horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_weight15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/weight" />
-                        <ImageView
-                            android:id="@+id/iv_weighta15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/thyroid" />
-                    </LinearLayout>
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight31"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight+Thyroid" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view135"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/ll_weight153"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        style="@style/activity_main_image"
-                        android:gravity="center_horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_weight135"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/weight" />
-                        <ImageView
-                            android:id="@+id/iv_weighta135"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/bp" />
-                    </LinearLayout>
-
-                    <com.healthtracker.component.MyFontTextView
-                        android:id="@+id/tv_weight135"
-                        style="@style/activity_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight+B.P" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-
     </LinearLayout>
 </ScrollView>
