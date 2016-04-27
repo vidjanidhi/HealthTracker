@@ -18,7 +18,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_hdl"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
@@ -39,7 +39,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_ldl"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
@@ -60,7 +60,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_total"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
@@ -81,7 +81,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_triglycerides"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>

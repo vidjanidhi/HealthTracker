@@ -8,12 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Home_ImageButton">
+    <style name="activity_main_image">
         <item name="android:padding">10dp</item>
-        <item name="android:background">@drawable/border</item>
+        <!--<item name="android:background">@drawable/border</item>-->
     </style>
 
-    <style name="Home_TitleText">
+    <style name="activity_main_text">
         <item name="android:padding">5dp</item>
         <!--<item name="android:background">@color/colorPrimary</item>-->
         <item name="android:layout_marginLeft">5dp</item>
@@ -24,22 +24,32 @@
         <!--<item name="android:gravity">center_horizontal</item>-->
     </style>
 
-    <style name="edittext">
+    <style name="fragment_edittext">
         <item name="android:ems">5</item>
         <item name="android:padding">10dp</item>
         <item name="android:background">@drawable/border</item>
         <item name="android:textSize">@dimen/font_size_12sp</item>
     </style>
 
-    <style name="textview">
+    <style name="fragment_textview">
         <item name="android:padding">10dp</item>
         <item name="android:textSize">@dimen/font_size_12sp</item>
     </style>
 
-    <style name="Manage_textview">
+    <style name="manage_screen_textview">
         <item name="android:padding">10dp</item>
         <item name="android:textSize">@dimen/font_size_20sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <style name="manage_screen_layout">
+        <item name="android:background">@drawable/border</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="manage_screen_image">
+        <item name="android:layout_margin">10dp</item>
     </style>
 
 

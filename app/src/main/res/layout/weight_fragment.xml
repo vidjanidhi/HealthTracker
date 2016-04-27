@@ -21,7 +21,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_weight"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_fat"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"></com.healthtracker.component.MyFontEdittextView>
@@ -67,7 +67,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_abdomen"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
@@ -89,7 +89,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_waist"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
@@ -111,7 +111,7 @@
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_hip"
-            style="@style/edittext"
+            style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>

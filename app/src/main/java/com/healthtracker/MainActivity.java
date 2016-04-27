@@ -5,25 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
-    private Spinner spinner1;
-    private LinearLayout llWeight;
-    private LinearLayout llGlucose;
-    private LinearLayout llBp;
-    private LinearLayout llColestrol;
-    private LinearLayout llThyroid;
-    private LinearLayout llDiary;
-    private LinearLayout llChart;
-    private LinearLayout llLogs;
-    private LinearLayout llAddlogs;
-    private LinearLayout llStatistics;
-    private LinearLayout llManage;
+import java.util.ArrayList;
+import java.util.List;
 
-    private void findViews() {
+public class MainActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
+     Spinner spinner1;
+     LinearLayout llWeight;
+     LinearLayout llGlucose;
+     LinearLayout llBp;
+     LinearLayout llColestrol;
+     LinearLayout llThyroid;
+     LinearLayout llDiary;
+     LinearLayout llChart;
+     LinearLayout llLogs;
+     LinearLayout llAddlogs;
+     LinearLayout llStatistics;
+     LinearLayout llManage;
+
+     void findViews() {
         spinner1 = (Spinner) findViewById(R.id.spinner);
         llWeight = (LinearLayout) findViewById(R.id.ll_weight);
         llGlucose = (LinearLayout) findViewById(R.id.ll_glucose);
@@ -56,6 +60,12 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
         setContentView(R.layout.activity_main);
         setTitle("Health tracker");
         findViews();
+        List<String> ary = new ArrayList<String>();
+        ary.add("nidhi");
+        ary.add("harvi");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ary);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(dataAdapter);
         spinner1.setOnItemSelectedListener(new ItemSelectedListener());
     }
 
@@ -63,20 +73,20 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_weight:
-                openAddDetailActivity(1,this);
+                openAddDetailActivity(1, this);
                 break;
 
             case R.id.ll_glucose:
                 openAddDetailActivity(2, this);
                 break;
             case R.id.ll_bp:
-                openAddDetailActivity(3,this);
+                openAddDetailActivity(3, this);
                 break;
             case R.id.ll_colestrol:
-                openAddDetailActivity(4,this);
+                openAddDetailActivity(4, this);
                 break;
             case R.id.ll_thyroid:
-                openAddDetailActivity(5,this);
+                openAddDetailActivity(5, this);
                 break;
             case R.id.ll_logs:
 
@@ -100,9 +110,10 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
                 break;
         }
     }
-    public void openAddDetailActivity(int fragment_id,Activity acct){
+
+    public void openAddDetailActivity(int fragment_id, Activity acct) {
         Intent intent = new Intent(acct, AddDetailActivity.class);
-        intent.putExtra("fragment_id",fragment_id);
+        intent.putExtra("fragment_id", fragment_id);
         startActivity(intent);
     }
 
