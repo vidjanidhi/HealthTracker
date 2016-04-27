@@ -30,7 +30,7 @@
 
             <com.healthtracker.component.MyTitleFontTextView
                 android:id="@+id/tv_weigdht"
-                style="@style/Home_TitleText"
+                style="@style/activity_main_text"
                 android:textSize="20sp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -62,14 +62,14 @@
 
                     <ImageView
                         android:id="@+id/iv_weight"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/weight" />
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight" />
@@ -94,14 +94,14 @@
 
                     <ImageView
                         android:id="@+id/iv_glucose"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/glucose" />
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_glucose"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Glucose" />
@@ -132,14 +132,14 @@
 
                     <ImageView
                         android:id="@+id/iv_weight34"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/bp" />
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight34"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="B.P" />
@@ -164,14 +164,14 @@
 
                     <ImageView
                         android:id="@+id/iv_weight134"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/colesterol" />
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight134"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Colesterol" />
@@ -201,14 +201,14 @@
 
                     <ImageView
                         android:id="@+id/iv_weight35"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/thyroid" />
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight35"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thyroid" />
@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:gravity="center_horizontal">
 
                         <ImageView
@@ -260,7 +260,7 @@
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight3"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight+Glucose" />
@@ -287,7 +287,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:gravity="center_horizontal">
 
                         <ImageView
@@ -304,7 +304,7 @@
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight13"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight+Colesterol" />
@@ -337,7 +337,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:gravity="center_horizontal">
 
                         <ImageView
@@ -353,7 +353,7 @@
                     </LinearLayout>
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight31"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight+Thyroid" />
@@ -380,7 +380,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        style="@style/Home_ImageButton"
+                        style="@style/activity_main_image"
                         android:gravity="center_horizontal">
 
                         <ImageView
@@ -397,7 +397,7 @@
 
                     <com.healthtracker.component.MyFontTextView
                         android:id="@+id/tv_weight135"
-                        style="@style/Home_TitleText"
+                        style="@style/activity_main_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight+B.P" />
