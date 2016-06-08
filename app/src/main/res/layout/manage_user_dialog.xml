@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.healthtracker.component.MyFontButton
+        android:id="@+id/btn_new_user"
+        style="@style/manage_screen_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:text="new user" />
+
+    <com.healthtracker.component.MyFontButton
+        android:id="@+id/btn_edit_user"
+        style="@style/manage_screen_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:text="edit user" />
+
+    <com.healthtracker.component.MyFontButton
+        android:id="@+id/btn_delete_user"
+        style="@style/manage_screen_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:text="delete user" />
+
+
+</LinearLayout>

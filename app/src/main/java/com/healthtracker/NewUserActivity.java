@@ -1,0 +1,128 @@
+package com.healthtracker;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
+import com.healthtracker.component.MyFontButton;
+import com.healthtracker.component.MyFontEdittextView;
+import com.healthtracker.component.MyFontTextView;
+import com.healthtracker.helper.DataBaseHelper;
+import com.healthtracker.helper.PreferenceHelper;
+import com.healthtracker.model.User;
+import com.healthtracker.util.AppConstant;
+
+import java.util.Calendar;
+
+public class NewUserActivity extends AppCompatActivity implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener {
+
+    private MyFontEdittextView etNewuserUsername;
+    private RadioGroup radioSex;
+    private RadioButton radioMale;
+    private RadioButton radioFemale;
+    private MyFontEdittextView etNewuserAge;
+    private MyFontTextView tvNewuserHeight;
+    private MyFontEdittextView etNewuserHeight;
+    private MyFontButton btnNewuserSave;
+    private MyFontButton btnNewuserCancel;
+    PreferenceHelper phelper;
+    DataBaseHelper dbhelper;
+    boolean activityEdit = false;
+    int date, month, year, edit_userId = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_user);
+        if (getIntent().getExtras() != null) {
+            edit_userId = getIntent().getIntExtra(AppConstant.USER_ID, 1);
+        }
+        findviews();
+        phelper = new PreferenceHelper(this);
+        dbhelper = new DataBaseHelper(this);
+        int lengthSeleted = phelper.getInteger(AppConstant.LENGTH_SELECTED);
+        if (lengthSeleted == AppConstant.LENGTH_SELECTED_UNIT_CM) {
+            tvNewuserHeight.setText("Height(cm)");
+        } else {
+            tvNewuserHeight.setText("Height(inch)");
+        }
+        if (activityEdit) {
+            User useer = dbhelper.getUser(edit_userId);
+            Log.i("user object", useer.getUserName() + useer.getAge());
+        }
+    }
+
+    private void findviews() {
+
+        etNewuserUsername = (MyFontEdittextView) findViewById(R.id.et_newuser_username);
+        radioSex = (RadioGroup) findViewById(R.id.radioSex);
+        radioMale = (RadioButton) findViewById(R.id.radioMale);
+        radioFemale = (RadioButton) findViewById(R.id.radioFemale);
+        etNewuserAge = (MyFontEdittextView) findViewById(R.id.et_newuser_age);
+        tvNewuserHeight = (MyFontTextView) findViewById(R.id.tv_newuser_height);
+        etNewuserHeight = (MyFontEdittextView) findViewById(R.id.et_newuser_height);
+        btnNewuserSave = (MyFontButton) findViewById(R.id.btn_newuser_save);
+        btnNewuserCancel = (MyFontButton) findViewById(R.id.btn_newuser_cancel);
+        btnNewuserSave.setOnClickListener(this);
+        btnNewuserCancel.setOnClickListener(this);
+        etNewuserAge.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_newuser_save:
+                User user = new User();
+                user.setUserName(etNewuserUsername.getText().toString());
+                user.setHeight(Integer.parseInt(etNewuserHeight.getText().toString()));
+                user.setAge(year, month, date);
+                int selectedId = radioSex.getCheckedRadioButtonId();
+                if ((selectedId == R.id.radioMale)) {
+                    user.setGender(User.MALE);
+                } else {
+                    user.setGender(User.FEMALE);
+                }
+                int userid = dbhelper.addUser(user);
+                Log.i("user id", userid + "");
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
+                break;
+
+            case R.id.btn_newuser_cancel:
+
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+
+                break;
+
+            case R.id.et_newuser_age:
+                final String FRAG_TAG_DATE_PICKER = "fragment_date_picker_name";
+                CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
+                        .setOnDateSetListener(this)
+                        .setFirstDayOfWeek(Calendar.SUNDAY)
+                        .setDoneText("Done")
+                        .setCancelText("Cancel")
+                        .setThemeLight();
+                cdp.show(getSupportFragmentManager(), FRAG_TAG_DATE_PICKER);
+                break;
+        }
+
+    }
+
+    @Override
+    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+        date = dayOfMonth;
+        month = monthOfYear;
+        this.year = year;
+        if (phelper.getInteger(AppConstant.DATE_SELECTED) == AppConstant.DATE_SELECTED_UNIT_DMY) {
+            etNewuserAge.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+        } else {
+            etNewuserAge.setText(monthOfYear + "/" + dayOfMonth + "/" + year);
+        }
+    }
+}

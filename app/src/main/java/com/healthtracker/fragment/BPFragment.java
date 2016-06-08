@@ -1,16 +1,21 @@
 package com.healthtracker.fragment;
 
-import android.support.v4.app.Fragment;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.healthtracker.AddDetailActivity;
+import com.healthtracker.MainActivity;
 import com.healthtracker.R;
-import com.healthtracker.component.MyFontTextView;
 import com.healthtracker.component.MyFontEdittextView;
+import com.healthtracker.component.MyFontTextView;
+import com.healthtracker.helper.PreferenceHelper;
+import com.healthtracker.model.BloodPresure;
+import com.healthtracker.util.AppConstant;
 
-public class BPFragment extends Fragment  {
+public class BPFragment extends Fragment {
 
     private MyFontTextView tvSystolic;
     private MyFontEdittextView etSystolic;
@@ -18,6 +23,39 @@ public class BPFragment extends Fragment  {
     private MyFontEdittextView etDiastolic;
     private MyFontTextView tvHeartRate;
     private MyFontEdittextView etHeartRate;
+    PreferenceHelper phelper = new PreferenceHelper(getContext());
+    int position;
+    boolean is_edit = false;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setTextviews();
+
+    }
+
+    private void setTextviews() {
+        if (is_edit) {
+            BloodPresure bloodPresure = MainActivity.bloodPresureArrayList.get(position);
+            etSystolic.setText(bloodPresure.getSystolic() + "");
+            etDiastolic.setText(bloodPresure.getDiastolic() + "");
+            etHeartRate.setText(bloodPresure.getHeartrate() + "");
+            AddDetailActivity.tvTime.setText(bloodPresure.getTime());
+            AddDetailActivity.tvDate.setText(bloodPresure.getDate());
+            AddDetailActivity.etNote.setText(bloodPresure.getNote());
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        phelper = new PreferenceHelper(getActivity());
+        if (getArguments() != null) {
+            Bundle bundle = getArguments();
+            position = bundle.getInt(AppConstant.POSITION);
+            is_edit = true;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

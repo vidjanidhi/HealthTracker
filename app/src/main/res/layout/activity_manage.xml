@@ -11,20 +11,19 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_manage_send_email"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_email"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_email_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_email"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,20 +31,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_users"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_manageuser"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_supervisor_account_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_manageuser"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,6 +51,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_export"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
 
@@ -60,14 +59,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_export"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_exit_to_app_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_export"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,65 +72,59 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_reminder"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_settings"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_settings_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_settings"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="Settings" />
+                android:text="Reminder" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_erase_all"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_erase"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_phonelink_erase_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_erase"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="Erase All" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_save"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_save"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_save_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_save"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,24 +132,128 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_manage_import_data"
             style="@style/manage_screen_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_import"
                 style="@style/manage_screen_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_assignment_returned_black_36dp" />
 
             <com.healthtracker.component.MyFontTextView
-                android:id="@+id/tv_import"
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Import Data" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_glucose_units"
+            style="@style/manage_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/manage_screen_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_returned_black_36dp" />
+
+            <com.healthtracker.component.MyFontTextView
+                android:id="@+id/tv_manage_glucose_units"
+                style="@style/manage_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Glucose Units(mmol/L)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_hbalc_units"
+            style="@style/manage_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/manage_screen_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_returned_black_36dp" />
+
+            <com.healthtracker.component.MyFontTextView
+                android:id="@+id/tv_manage_hba1c_units"
+                style="@style/manage_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HbA1c Units(mmol/mol)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_weight_units"
+            style="@style/manage_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/manage_screen_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_returned_black_36dp" />
+
+            <com.healthtracker.component.MyFontTextView
+                android:id="@+id/tv_manage_weight_units"
+                style="@style/manage_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight Units(kg)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_lenght_units"
+            style="@style/manage_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/manage_screen_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_returned_black_36dp" />
+
+            <com.healthtracker.component.MyFontTextView
+                android:id="@+id/tv_manage_length_units"
+                style="@style/manage_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Length Units(cm)" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_date_format"
+            style="@style/manage_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/manage_screen_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_assignment_returned_black_36dp" />
+
+            <com.healthtracker.component.MyFontTextView
+                android:id="@+id/tv_date_format"
+                style="@style/manage_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Formate" />
         </LinearLayout>
 
     </LinearLayout>

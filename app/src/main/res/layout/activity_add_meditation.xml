@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.healthtracker.AddMeditationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_med_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/datepicker_border"
+            android:text="Done" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_med_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center|center_vertical"
+            android:padding="10dp"
+            android:text="Pick Med(s)"
+            android:textSize="@dimen/font_size_18sp" />
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_med_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/datepicker_border"
+            android:text="+" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lst_meds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:divider="@null"
+        android:focusable="false" />
+
+
+</LinearLayout>

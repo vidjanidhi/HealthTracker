@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:context="com.healthtracker.NewUserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="User Name"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_newuser_username"
+            style="@style/fragment_edittext"
+            android:layout_width="0dp"
+            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/radioSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="Age"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_newuser_age"
+            style="@style/fragment_edittext"
+            android:layout_width="0dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_newuser_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:padding="10dp"
+            android:text="Height"></com.healthtracker.component.MyFontTextView>
+
+        <com.healthtracker.component.MyFontEdittextView
+            android:id="@+id/et_newuser_height"
+            style="@style/fragment_edittext"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_newuser_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/datepicker_border"
+            android:text="Save"></com.healthtracker.component.MyFontButton>
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_newuser_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/datepicker_border"
+            android:text="Cancel"></com.healthtracker.component.MyFontButton>
+    </LinearLayout>
+
+</LinearLayout>

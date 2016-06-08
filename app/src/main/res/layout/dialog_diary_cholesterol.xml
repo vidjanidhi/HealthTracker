@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_bp_date"
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="date" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_bp_time"
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <com.healthtracker.component.MyFontTextView
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="HDL" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_c_hdl"
+            style="@style/activity_main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <com.healthtracker.component.MyFontTextView
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="LDL" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_c_ldl"
+            style="@style/activity_main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <com.healthtracker.component.MyFontTextView
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Total" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_c_total"
+            style="@style/activity_main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <com.healthtracker.component.MyFontTextView
+            style="@style/activity_main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Triglyceride" />
+
+        <com.healthtracker.component.MyFontTextView
+            android:id="@+id/tv_dialog_c_triglyceride"
+            style="@style/activity_main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="time" />
+    </LinearLayout>
+
+
+    <com.healthtracker.component.MyFontTextView
+        android:id="@+id/tv_dialog_weight_note"
+        style="@style/activity_main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="note" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_dialog_caancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/datepicker_border"
+            android:text="cancel" />
+
+        <com.healthtracker.component.MyFontButton
+            android:id="@+id/btn_dialog_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/datepicker_border"
+            android:text="edit" />
+
+    </LinearLayout>
+
+</LinearLayout>

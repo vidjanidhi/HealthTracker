@@ -48,7 +48,9 @@
             style="@style/fragment_edittext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"></com.healthtracker.component.MyFontEdittextView>
+            android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="3"></com.healthtracker.component.MyFontEdittextView>
     </LinearLayout>
 
     <LinearLayout
