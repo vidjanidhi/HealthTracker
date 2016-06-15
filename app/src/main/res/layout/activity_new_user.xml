@@ -8,7 +8,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-
     tools:context="com.healthtracker.NewUserActivity">
 
     <LinearLayout
@@ -22,15 +21,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:padding="10dp"
-            android:text="User Name"></com.healthtracker.component.MyFontTextView>
+            android:text="User Name" />
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_newuser_username"
             style="@style/fragment_edittext"
             android:layout_width="0dp"
-            android:inputType="text"
             android:layout_height="wrap_content"
-            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+            android:layout_weight="1.3"
+            android:inputType="text" />
     </LinearLayout>
 
 
@@ -67,16 +66,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:padding="10dp"
-            android:text="Age"></com.healthtracker.component.MyFontTextView>
+            android:text="Birthdate"></com.healthtracker.component.MyFontTextView>
 
         <com.healthtracker.component.MyFontEdittextView
             android:id="@+id/et_newuser_age"
             style="@style/fragment_edittext"
             android:layout_width="0dp"
-            android:focusable="false"
-            android:clickable="true"
             android:layout_height="wrap_content"
-            android:layout_weight="1.3"></com.healthtracker.component.MyFontEdittextView>
+            android:layout_weight="1.3"
+            android:clickable="true"
+            android:focusable="false"></com.healthtracker.component.MyFontEdittextView>
     </LinearLayout>
 
     <LinearLayout

@@ -22,13 +22,8 @@
         <activity android:name=".DiaryActivity" />
         <activity android:name=".StatisticsActivity" />
         <activity android:name=".AddLogActivity" />
-        <activity android:name=".AddMeditationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".AddMeditationActivity"></activity>
+        <activity android:name=".LogDisplayActivity"></activity>
     </application>
 
 </manifest>

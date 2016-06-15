@@ -5,6 +5,7 @@ package com.healthtracker.util;
  */
 public class AppConstant {
 
+
     public static final String FRAGMENT_ID = "fragment_id";
     public static final String POSITION = "position";
     public static final String IS_EDIT = "is_edit";
@@ -76,6 +77,36 @@ public class AppConstant {
 
     public static final int DATE_SELECTED_UNIT_DMY = 0;
     public static final int DATE_SELECTED_UNIT_MDY = 1;
+
+    //time for logs meditation
+    public static final String OUT_OF_BED = "Out Of Bed";
+    public static final String BEFORE_BREAKFAST = "Before breakfast";
+    public static final String AFTER_BREAKFAST = "After Breakfast";
+    public static final String BEFORE_LUNCH = "Before Lunch";
+    public static final String AFTER_LUNCH = "After Lunch";
+    public static final String BEFORE_DINNER = "Before Dinner";
+    public static final String AFTTER_DINNER = "After Dinner";
+    public static final String BEFORE_BED = "Before Bed";
+    public static final String DURING_NIGHT = "During Night";
+    public static final String AFTER_BED = "After_Bed";
+    public static final String BEFORE_SNACK = "Before Snack";
+    public static final String AFTER_SNACK = "After Snack";
+    public static final String BEFORE_ACTIVIYT = "Before Activity";
+    public static final String DURING_ACTIVIYT = "During Activity";
+    public static final String AFTER_ACTIVITY = "After Activity";
+    public static final String OTHER = "Other";
+
+    //time for Food
+
+    public static final String BREAKFAST = "Breakfast";
+    public static final String LUNCH = "Lunch";
+    public static final String DINNER = "Dinner";
+    public static final String SNACK = "Snack";
+
+
+
+
+
 
 
 }

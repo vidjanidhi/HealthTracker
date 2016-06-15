@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.healthtracker.model.BloodPresure;
 import com.healthtracker.model.Glucose;
 import com.healthtracker.model.Log;
+import com.healthtracker.model.LogEntry;
 import com.healthtracker.model.Thyroid;
 import com.healthtracker.model.User;
 import com.healthtracker.model.Weight;
@@ -162,6 +163,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + ");";
 
 
+    private static final String TABLE_LOG_ENTRY = "log_entry";
+    private static final String KEY_LOG_DETAIL_IDS = "log_detail_ids";
+    private static final String KEY_SELECTED_TIME = "selected_time";
+    private static final String KEY_ID = "id";
+    private static final String KEY_QUANTITY = "quantity";
+    private static final String TABLE_CREATE_LOG_ENTRY = "CREATE TABLE IF NOT EXISTS "
+            + TABLE_LOG_ENTRY + "( "
+            + KEY_ID + " integer primary key autoincrement,"
+            + KEY_USER_ID + " INTEGER,"
+            + KEY_NOTE + " text,"
+            + KEY_DATE + " text,"
+            + KEY_TIME + " text,"
+            + KEY_SELECTED_TIME + " text,"
+            + KEY_ROWID + " INTEGER, "
+            + KEY_QUANTITY + " INTEGER"
+            + ");";
+
+
     private static final String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + TABLE_USER;
     private static final String DROP_TABLE_WEIGHT = "DROP TABLE IF EXISTS " + TABLE_WEIGHT;
     private static final String DROP_TABLE_GLUCOSE = "DROP TABLE IF EXISTS " + TABLE_GLUCOSE;
@@ -170,6 +189,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_THYROID = "DROP TABLE IF EXISTS " + TABLE_THYROID;
     private static final String DROP_TABLE_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
     private static final String DROP_TABLE_LOG = "DROP TABLE IF EXISTS " + TABLE_LOG;
+    private static final String DROP_TABLE_LOG_ENTRY = "DROP TABLE IF EXISTS " + TABLE_LOG_ENTRY;
 
 
     public DataBaseHelper(Context context) {
@@ -185,6 +205,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE_CHOLESEROL);
         db.execSQL(TABLE_CREATE_THYROID);
         db.execSQL(TABLE_CREATE_LOG);
+        db.execSQL(TABLE_CREATE_LOG_ENTRY);
+
 
     }
 
@@ -197,6 +219,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_TABLE_CHOLESEROL);
         db.execSQL(DROP_TABLE_THYROID);
         db.execSQL(DROP_TABLE_LOG);
+        db.execSQL(DROP_TABLE_LOG_ENTRY);
         onCreate(db);
     }
 
@@ -216,6 +239,69 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
         return userId;
+    }
+
+
+    public int addLogEntry(LogEntry logEntry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER_ID, logEntry.getUserId());
+        values.put(KEY_NOTE, logEntry.getNote());
+        values.put(KEY_DATE, logEntry.getDate());
+        values.put(KEY_TIME, logEntry.getTime());
+        values.put(KEY_SELECTED_TIME, logEntry.getSelectedTime());
+        values.put(KEY_ROWID, logEntry.getRowId());
+        values.put(KEY_QUANTITY, logEntry.getQuantity());
+        db.insert(TABLE_LOG_ENTRY, null, values);
+        String selectQuery = "SELECT  * FROM " + TABLE_LOG_ENTRY;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToLast();
+        int userId = cursor.getInt(0);
+        db.close(); // Closing database connection
+        return userId;
+    }
+
+    public ArrayList<LogEntry> getAllLogEntry(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_LOG_ENTRY + " where " + KEY_USER_ID + " = " + userId;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ArrayList<LogEntry> logEntryArrayList = new ArrayList<LogEntry>();
+        if (cursor.moveToFirst()) {
+            do {
+                LogEntry logEntry = new LogEntry();
+                logEntry.setRowId(cursor.getInt(cursor.getColumnIndex(KEY_ROWID)));
+                logEntry.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+                logEntry.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                logEntry.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
+                logEntry.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
+                logEntry.setSelectedTime(cursor.getString(cursor.getColumnIndex(KEY_SELECTED_TIME)));
+                logEntry.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                logEntry.setQuantity(cursor.getInt(cursor.getColumnIndex(KEY_QUANTITY)));
+                logEntryArrayList.add(logEntry);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return logEntryArrayList;
+    }
+
+
+    public Log getLogFromRowId(int rowId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_LOG + " where " + KEY_ROWID + " = " + rowId;
+        Log log = new Log();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                log.setRowId(cursor.getInt(cursor.getColumnIndex(KEY_ROWID)));
+                log.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+                log.setUnit(cursor.getString(cursor.getColumnIndex(KEY_UNIT)));
+                log.setLogId(cursor.getInt(cursor.getColumnIndex(KEY_LOGID)));
+            } while (cursor.moveToNext());
+        }
+        return log;
+
     }
 
     public ArrayList<Log> getAllLog(int logId) {

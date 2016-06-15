@@ -149,7 +149,8 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
                     openAddDetailActivity(5, this);
                     break;
                 case R.id.ll_logs:
-
+                    Intent intentlog = new Intent(this, LogDisplayActivity.class);
+                    startActivity(intentlog);
                     break;
                 case R.id.ll_addlogs:
                     Intent intent_add_log = new Intent(this, AddLogActivity.class);
