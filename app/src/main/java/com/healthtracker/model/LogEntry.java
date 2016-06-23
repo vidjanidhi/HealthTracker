@@ -5,7 +5,7 @@ package com.healthtracker.model;
  */
 public class LogEntry {
 
-    String date, time, logDetailIds, note, selectedTime;
+    String date, time, note, selectedTime;
     int userId, rowId, id, quantity;
 
     public int getId() {
@@ -48,13 +48,6 @@ public class LogEntry {
         this.time = time;
     }
 
-    public String getLogDetailIds() {
-        return logDetailIds;
-    }
-
-    public void setLogDetailIds(String logDetailIds) {
-        this.logDetailIds = logDetailIds;
-    }
 
     public String getNote() {
         return note;

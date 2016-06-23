@@ -41,6 +41,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_new_user);
         if (getIntent().getExtras() != null) {
             edit_userId = getIntent().getIntExtra(AppConstant.USER_ID, 1);
+            activityEdit = true;
         }
         findviews();
         phelper = new PreferenceHelper(this);
@@ -51,9 +52,19 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         } else {
             tvNewuserHeight.setText("Height(inch)");
         }
+        Log.i("activity edit", activityEdit + "");
         if (activityEdit) {
             User useer = dbhelper.getUser(edit_userId);
             Log.i("user object", useer.getUserName() + useer.getAge());
+            etNewuserAge.setText(useer.getAge() + "");
+            etNewuserUsername.setText(useer.getUserName());
+            etNewuserHeight.setText(useer.getHeight() + "");
+
+            if (useer.getGender() == User.MALE) {
+                radioMale.setChecked(true);
+            } else {
+                radioFemale.setChecked(true);
+            }
         }
     }
 
@@ -87,8 +98,14 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
                 } else {
                     user.setGender(User.FEMALE);
                 }
-                int userid = dbhelper.addUser(user);
-                Log.i("user id", userid + "");
+                if (activityEdit) {
+                    dbhelper.updateUser(user);
+
+                } else {
+                    int userid = dbhelper.addUser(user);
+                    Log.i("user id", userid + "");
+                }
+
                 Intent intent1 = new Intent(this, MainActivity.class);
                 startActivity(intent1);
                 break;

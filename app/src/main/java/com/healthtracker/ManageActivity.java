@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -12,17 +14,29 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.healthtracker.component.MyFontTextView;
+import com.healthtracker.helper.DataBaseHelper;
 import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.util.AppConstant;
+import com.healthtracker.util.Util;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.channels.FileChannel;
 
 public class ManageActivity extends ActionBarBaseActivitiy implements OnClickListener {
 
+    private static final int YOUR_RESULT_CODE = 1;
+    private static final String TAG = "tag";
     public int position = 0;
     public int dialogId = 0;
     PreferenceHelper phelper;
-
+    String path = null;
     private LinearLayout llManageSendEmail;
     private LinearLayout llManageUsers;
     private LinearLayout llManageExport;
@@ -41,12 +55,15 @@ public class ManageActivity extends ActionBarBaseActivitiy implements OnClickLis
     private LinearLayout llManageDateFormat;
     private MyFontTextView tvDateFormat;
 
+    DataBaseHelper dataBaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
         setTitle("Health tracker");
+        dataBaseHelper = new DataBaseHelper(this);
         phelper = new PreferenceHelper(this);
         findviews();
 
@@ -98,15 +115,29 @@ public class ManageActivity extends ActionBarBaseActivitiy implements OnClickLis
             case R.id.btn_edit_user:
 
                 Intent intent_edit = new Intent(this, NewUserActivity.class);
-                intent_edit.putExtra(AppConstant.USER_ID, 1);
+                intent_edit.putExtra(AppConstant.USER_ID, phelper.getInteger(AppConstant.USER_ID));
                 startActivity(intent_edit);
 
                 break;
             case R.id.btn_delete_user:
-
+                phelper.removeKey(AppConstant.USER_ID);
+                dataBaseHelper.deleteUser(phelper.getInteger(AppConstant.USER_ID));
+                Intent intent1 = new Intent(this, MainActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.ll_manage_send_email:
-
+                exportDB();
+                String filename = DataBaseHelper.DATABASE_NAME;
+                File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+                Uri path = Uri.fromFile(filelocation);
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+// set the type to 'email'
+                emailIntent.setType("vnd.android.cursor.dir/email");
+// the attachment
+                emailIntent.putExtra(Intent.EXTRA_STREAM, path);
+// the mail subject
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
                 break;
             case R.id.ll_manage_users:
 
@@ -133,18 +164,23 @@ public class ManageActivity extends ActionBarBaseActivitiy implements OnClickLis
 
                 break;
             case R.id.ll_manage_export:
-
+                exportDB();
                 break;
             case R.id.ll_manage_reminder:
 
                 break;
             case R.id.ll_manage_erase_all:
+                this.deleteDatabase(DataBaseHelper.DATABASE_NAME);
+                phelper.clearAll();
+                Intent intent_new = new Intent(this, MainActivity.class);
+                startActivity(intent_new);
 
                 break;
             case R.id.ll_manage_save:
 
                 break;
             case R.id.ll_manage_import_data:
+                importDB();
 
                 break;
             case R.id.ll_manage_glucose_units:
@@ -181,8 +217,88 @@ public class ManageActivity extends ActionBarBaseActivitiy implements OnClickLis
 
     }
 
-    public void showDialog(final CharSequence[] items, int selectedItem, final int dialogId) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // Get the Uri of the selected file
+            Uri uri = data.getData();
+            Log.d(TAG, "File Uri: " + uri.toString());
+            // Get the path
 
+            try {
+                path = Util.getPath(this, uri);
+                try {
+                    dataBaseHelper.importDatabase(path, this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG, "File Path: " + path);
+            // Get the file instance
+            // File file = new File(path);
+            // Initiate the upload
+        }
+    }
+
+    private void importDB() {
+        // TODO Auto-generated method stub
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("file/*");
+        startActivityForResult(intent, YOUR_RESULT_CODE);
+//        try {
+//            File sd = Environment.getExternalStorageDirectory();
+//            File data = Environment.getDataDirectory();
+//
+//            if (sd.canWrite()) {
+//                String currentDBPath = "//data//" + "com.healthtracker"
+//                        + "//databases//" + DataBaseHelper.DATABASE_NAME;
+//                String backupDBPath = DataBaseHelper.DATABASE_NAME;
+//                File backupDB = new File(data, currentDBPath);
+//                File currentDB = new File(sd, backupDBPath);
+//
+//                FileChannel src = new FileInputStream(currentDB).getChannel();
+//                FileChannel dst = new FileOutputStream(backupDB).getChannel();
+//                dst.transferFrom(src, 0, src.size());
+//                src.close();
+//                dst.close();
+//                Toast.makeText(getBaseContext(), backupDB.toString(),
+//                        Toast.LENGTH_LONG).show();
+//
+//            }
+//        } catch (Exception e) {
+//
+//            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG)
+//                    .show();
+//
+//        }
+    }
+
+    private void exportDB() {
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        FileChannel source = null;
+        FileChannel destination = null;
+        String currentDBPath = "/data/" + "com.healthtracker" + "/databases/" + DataBaseHelper.DATABASE_NAME;
+        String backupDBPath = DataBaseHelper.DATABASE_NAME;
+        File currentDB = new File(data, currentDBPath);
+        File backupDB = new File(sd, backupDBPath);
+        try {
+            source = new FileInputStream(currentDB).getChannel();
+            destination = new FileOutputStream(backupDB).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+            Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showDialog(final CharSequence[] items, int selectedItem, final int dialogId) {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose an option");

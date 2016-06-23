@@ -6,5 +6,8 @@
     <color name="color_white">#ffffff</color>
     <color name="datepicker_bg">#7703a9f9</color>
     <color name="dark_blue">#6103f9</color>
+    <color name="green">#90fa27</color>
+    <color name="orange">#e9910d</color>
+    <color name="grey">#b9b6af</color>
 
 </resources>

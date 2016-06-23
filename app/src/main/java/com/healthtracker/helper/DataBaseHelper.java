@@ -14,7 +14,12 @@ import com.healthtracker.model.Thyroid;
 import com.healthtracker.model.User;
 import com.healthtracker.model.Weight;
 import com.healthtracker.model.cholesterol;
+import com.healthtracker.util.Util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "healthTracker";
+    public static final String DATABASE_NAME = "healthTracker";
     //tables
     private static final String TABLE_USER = "user";
     private static final String TABLE_WEIGHT = "weight";
@@ -190,6 +195,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
     private static final String DROP_TABLE_LOG = "DROP TABLE IF EXISTS " + TABLE_LOG;
     private static final String DROP_TABLE_LOG_ENTRY = "DROP TABLE IF EXISTS " + TABLE_LOG_ENTRY;
+    private static final String DB_FILEPATH = "/data/data/" + "com.healthtracker" + "/databases/" + DATABASE_NAME + ".db";
 
 
     public DataBaseHelper(Context context) {
@@ -222,6 +228,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DROP_TABLE_LOG_ENTRY);
         onCreate(db);
     }
+
+    public boolean importDatabase(String dbPath, Context context) throws IOException {
+
+        // Close the SQLiteOpenHelper so it will commit the created empty
+        // database to internal storage.
+        close();
+        context.deleteDatabase(DATABASE_NAME);
+        File newDb = new File(dbPath);
+        File oldDb = new File(DB_FILEPATH);
+        if (newDb.exists()) {
+            Util.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
+            // Access the copied database so SQLiteHelper will cache it and mark
+            // it as created.
+            getWritableDatabase().close();
+            return true;
+        }
+        return false;
+    }
+
 
     public int addLog(Log log) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -261,6 +286,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userId;
     }
 
+    public int updateLogEntry(LogEntry logEntry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER_ID, logEntry.getUserId());
+        values.put(KEY_NOTE, logEntry.getNote());
+        values.put(KEY_DATE, logEntry.getDate());
+        values.put(KEY_TIME, logEntry.getTime());
+        values.put(KEY_SELECTED_TIME, logEntry.getSelectedTime());
+        values.put(KEY_ROWID, logEntry.getRowId());
+        values.put(KEY_QUANTITY, logEntry.getQuantity());
+        return db.update(TABLE_LOG_ENTRY, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(logEntry.getId())});
+    }
+
+    public long deleteLogEntry(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_LOG_ENTRY, KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
+
+    }
+
     public ArrayList<LogEntry> getAllLogEntry(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT  * FROM " + TABLE_LOG_ENTRY + " where " + KEY_USER_ID + " = " + userId;
@@ -286,6 +332,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return logEntryArrayList;
     }
 
+    public LogEntry getLogEntryFromId(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT  * FROM " + TABLE_LOG_ENTRY + " where " + KEY_ID + " = " + id;
+        LogEntry log = new LogEntry();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                log.setRowId(cursor.getInt(cursor.getColumnIndex(KEY_ROWID)));
+                log.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                log.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
+                log.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
+                log.setSelectedTime(cursor.getString(cursor.getColumnIndex(KEY_SELECTED_TIME)));
+                log.setQuantity(cursor.getInt(cursor.getColumnIndex(KEY_QUANTITY)));
+                log.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                log.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+
+            } while (cursor.moveToNext());
+        }
+        return log;
+    }
 
     public Log getLogFromRowId(int rowId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -357,10 +423,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(int userid) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USER, KEY_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getUserId())});
+                new String[]{String.valueOf(userid)});
         db.close();
 
     }

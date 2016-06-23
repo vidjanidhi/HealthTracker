@@ -150,6 +150,7 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
                 }
                 break;
             case AppConstant.MIS_FRAGMENT:
+                spinner.setVisibility(View.GONE);
                 btnAddLog.setVisibility(View.GONE);
                 break;
         }
@@ -198,6 +199,23 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
                                 startActivity(intent);
                             }
                         }
+                    }
+                } else {
+
+                    LogEntry logEntry = new LogEntry();
+                    logEntry.setUserId(phelper.getInteger(AppConstant.USER_ID));
+                    logEntry.setDate(tvDate.getText().toString());
+                    logEntry.setTime(tvTime.getText().toString());
+                    logEntry.setNote(etNote.getText().toString());
+                    com.healthtracker.model.Log log = new com.healthtracker.model.Log();
+                    log.setLogId(AppConstant.MIS_FRAGMENT);
+                    int rowid = dbhelper.addLog(log);
+                    logEntry.setRowId(rowid);
+                    int id = dbhelper.addLogEntry(logEntry);
+                    Log.i("id", id + "");
+                    if (id > 0) {
+                        Intent intent = new Intent(this.getActivity(), MainActivity.class);
+                        startActivity(intent);
                     }
                 }
 

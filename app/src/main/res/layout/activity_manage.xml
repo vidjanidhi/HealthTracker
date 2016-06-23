@@ -111,25 +111,7 @@
                 android:text="Erase All" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_manage_save"
-            style="@style/manage_screen_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <ImageView
-                style="@style/manage_screen_image"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_save_black_36dp" />
-
-            <com.healthtracker.component.MyFontTextView
-                style="@style/manage_screen_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Save Data" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_manage_import_data"

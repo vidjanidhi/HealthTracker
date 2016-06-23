@@ -65,4 +65,21 @@ public class PreferenceHelper {
         editor.putInt(key, value);
         editor.commit();
     }
+
+    public void clearAll() {
+        pref = parentActivity.getSharedPreferences(HEALTH_TRACKER_INFO,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    public void removeKey(String key) {
+        pref = parentActivity.getSharedPreferences(HEALTH_TRACKER_INFO,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(key);
+        editor.commit();
+
+    }
 }

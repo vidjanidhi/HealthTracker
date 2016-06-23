@@ -26,6 +26,7 @@ public class AppConstant {
 
 
     public static final String USER_ID = "user_id";
+    public static final String LOG_ENTRY_ID = "logentry_id";
 
     //units
 
@@ -103,10 +104,13 @@ public class AppConstant {
     public static final String DINNER = "Dinner";
     public static final String SNACK = "Snack";
 
+    //constant for phelper
 
-
-
-
+    public static final String DAY_SELECTED = "log_selected";
+    public static String MED_SELECTED = "med_selected";
+    public static String FOOD_SELECTED = "food_selected";
+    public static String ACTIVITY_SELECTED = "activity_selected";
+    public static String MIS_SELECTED = "mis_selected";
 
 
 }
