@@ -8,6 +8,17 @@ public class BloodPresure {
     String note, date, time;
     int userId, rowId;
 
+    public void setByteArray(String byteArray) {
+        this.ImagePath = byteArray;
+    }
+
+    public String ImagePath;
+
+    public String getbyteArray() {
+        return ImagePath;
+    }
+
+
     public int getRowId() {
         return rowId;
     }

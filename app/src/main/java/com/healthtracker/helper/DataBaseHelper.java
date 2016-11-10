@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.widget.Toast;
 
 import com.healthtracker.model.BloodPresure;
 import com.healthtracker.model.Glucose;
@@ -14,12 +16,12 @@ import com.healthtracker.model.Thyroid;
 import com.healthtracker.model.User;
 import com.healthtracker.model.Weight;
 import com.healthtracker.model.cholesterol;
-import com.healthtracker.util.Util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +75,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String KEY_NOTE = "note";
     private static final String KEY_DATE = "date";
     private static final String KEY_TIME = "time";
+    private static final String KEY_IMAGE = "image";
 
 
     private static final String TABLE_CREATE_WEIGHT = "CREATE TABLE IF NOT EXISTS "
@@ -86,7 +89,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + KEY_NOTE + " text,"
             + KEY_DATE + " text,"
             + KEY_TIME + " text,"
-            + KEY_HIP + " text" +
+            + KEY_HIP + " text,"
+            + KEY_IMAGE + " text" +
             ");";
 
     // create glucose
@@ -104,7 +108,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + KEY_DATE + " text,"
             + KEY_TIME + " text,"
             + KEY_HBA1C + " text,"
-            + KEY_TESTING_TIME + " text"
+            + KEY_TESTING_TIME + " text,"
+            + KEY_IMAGE + " text"
+
             + ");";
 
     //create  B.P
@@ -121,7 +127,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + KEY_NOTE + " text,"
             + KEY_DATE + " text,"
             + KEY_TIME + " text,"
-            + KEY_HEART_RATE + " text"
+            + KEY_HEART_RATE + " text,"
+            + KEY_IMAGE + " text"
+
             + ");";
 
     //create cholestrol
@@ -140,7 +148,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + KEY_NOTE + " text,"
             + KEY_DATE + " text,"
             + KEY_TIME + " text,"
-            + KEY_TRIGLYCERIDES + " text"
+            + KEY_TRIGLYCERIDES + " text,"
+            + KEY_IMAGE + " text"
             + ");";
 
     //create thyroid
@@ -153,7 +162,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + KEY_NOTE + " text,"
             + KEY_DATE + " text,"
             + KEY_TIME + " text,"
-            + KEY_TSH_LEVEL + " text"
+            + KEY_TSH_LEVEL + " text,"
+            + KEY_IMAGE + " text"
+
             + ");";
 
     private static final String KEY_UNIT = "unit";
@@ -195,7 +206,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_FOOD = "DROP TABLE IF EXISTS " + TABLE_FOOD;
     private static final String DROP_TABLE_LOG = "DROP TABLE IF EXISTS " + TABLE_LOG;
     private static final String DROP_TABLE_LOG_ENTRY = "DROP TABLE IF EXISTS " + TABLE_LOG_ENTRY;
-    private static final String DB_FILEPATH = "/data/data/" + "com.healthtracker" + "/databases/" + DATABASE_NAME + ".db";
+    private static final String DB_FILEPATH = "/data/" + "com.healthtracker" + "/databases/" + DataBaseHelper.DATABASE_NAME;
 
 
     public DataBaseHelper(Context context) {
@@ -212,8 +223,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE_THYROID);
         db.execSQL(TABLE_CREATE_LOG);
         db.execSQL(TABLE_CREATE_LOG_ENTRY);
-
-
     }
 
     @Override
@@ -230,23 +239,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean importDatabase(String dbPath, Context context) throws IOException {
-
         // Close the SQLiteOpenHelper so it will commit the created empty
         // database to internal storage.
-        close();
-        context.deleteDatabase(DATABASE_NAME);
-        File newDb = new File(dbPath);
-        File oldDb = new File(DB_FILEPATH);
-        if (newDb.exists()) {
-            Util.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
-            // Access the copied database so SQLiteHelper will cache it and mark
-            // it as created.
-            getWritableDatabase().close();
-            return true;
-        }
-        return false;
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        String currentDBPath = "//data//" + "com.healthtracker"
+                + "//databases//" + DATABASE_NAME;
+        String backupDBPath = dbPath;
+        File backupDB = new File(data, currentDBPath);
+        File currentDB = new File(sd, backupDBPath);
+
+        FileChannel src = new FileInputStream(currentDB).getChannel();
+        FileChannel dst = new FileOutputStream(backupDB).getChannel();
+        dst.transferFrom(src, 0, src.size());
+        src.close();
+        dst.close();
+        Toast.makeText(context, backupDB.toString(), Toast.LENGTH_LONG).show();
+        return true;
     }
 
+
+    /***************************************************************************/
+//        close();
+////        context.deleteDatabase(DATABASE_NAME);
+//        ManageActivity.verifyStoragePermissions((Activity) context);
+//        File newDb = new File(dbPath);
+//        File oldDb = context.getDatabasePath(DATABASE_NAME);
+//        android.util.Log.i("dbpath", dbPath.toString());
+////        File oldDb = new File(DB_FILEPATH);
+//        if (newDb.exists()) {
+//            Util.copyFile(new FileInputStream(newDb), new FileOutputStream(oldDb));
+//            android.util.Log.i("file copied","aa");
+//            // Access the copied database so SQLiteHelper will cache it and mark
+//            // it as created.
+//            getWritableDatabase().close();
+//            return true;
+//        }
+//        return false;
+//    }
 
     public int addLog(Log log) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -443,6 +473,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_NOTE, weight.getNote());
         values.put(KEY_DATE, weight.getDate());
         values.put(KEY_TIME, weight.getTime());
+        values.put(KEY_IMAGE, weight.getbyteArray());
 
         return db.insert(TABLE_WEIGHT, null, values);
 //        db.close();
@@ -460,6 +491,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_NOTE, weight.getNote());
         values.put(KEY_DATE, weight.getDate());
         values.put(KEY_TIME, weight.getTime());
+        values.put(KEY_IMAGE, weight.getbyteArray());
+
         return db.update(TABLE_WEIGHT, values, KEY_ROWID + " = ?",
                 new String[]{String.valueOf(weight.getRowId())});
     }
@@ -514,6 +547,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_GLUCOSE, glucose.getGlucose());
         values.put(KEY_HBA1C, glucose.getHba1c());
         values.put(KEY_TESTING_TIME, glucose.getTestingTime());
+        values.put(KEY_IMAGE, glucose.getbyteArray());
+
         return db.insert(TABLE_GLUCOSE, null, values);
 
     }
@@ -527,6 +562,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_TIME, glucose.getTime());
         values.put(KEY_GLUCOSE, glucose.getGlucose());
         values.put(KEY_HBA1C, glucose.getHba1c());
+        values.put(KEY_IMAGE, glucose.getbyteArray());
+
         values.put(KEY_TESTING_TIME, glucose.getTestingTime());
         return db.update(TABLE_GLUCOSE, values, KEY_ROWID + " = ?",
                 new String[]{String.valueOf(glucose.getRowId())});
@@ -543,6 +580,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_LDL, cholesterol.getLdl());
         values.put(KEY_TOTAL, cholesterol.getTotal());
         values.put(KEY_TRIGLYCERIDES, cholesterol.getTriglyceride());
+        values.put(KEY_IMAGE, cholesterol.getbyteArray());
+
         return db.insert(TABLE_CHOLESEROL, null, values);
 
     }
@@ -558,6 +597,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_LDL, cholesterol.getLdl());
         values.put(KEY_TOTAL, cholesterol.getTotal());
         values.put(KEY_TRIGLYCERIDES, cholesterol.getTriglyceride());
+        values.put(KEY_IMAGE, cholesterol.getbyteArray());
+
         return db.update(TABLE_CHOLESEROL, values, KEY_ROWID + " = ?",
                 new String[]{String.valueOf(cholesterol.getRowId())});
     }
@@ -572,6 +613,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_SYSTOLIC, bloodPresure.getSystolic());
         values.put(KEY_DIASTOLIC, bloodPresure.getDiastolic());
         values.put(KEY_HEART_RATE, bloodPresure.getHeartrate());
+        values.put(KEY_IMAGE, bloodPresure.getbyteArray());
+
         return db.insert(TABLE_B_P, null, values);
 
     }
@@ -586,6 +629,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_SYSTOLIC, bloodPresure.getSystolic());
         values.put(KEY_DIASTOLIC, bloodPresure.getDiastolic());
         values.put(KEY_HEART_RATE, bloodPresure.getHeartrate());
+        values.put(KEY_IMAGE, bloodPresure.getbyteArray());
+
         return db.update(TABLE_B_P, values, KEY_ROWID + " = ?",
                 new String[]{String.valueOf(bloodPresure.getRowId())});
 
@@ -599,6 +644,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_DATE, thyroid.getDate());
         values.put(KEY_TIME, thyroid.getTime());
         values.put(KEY_TSH_LEVEL, thyroid.getTshLevel());
+        values.put(KEY_IMAGE, thyroid.getbyteArray());
+
         return db.insert(TABLE_THYROID, null, values);
     }
 
@@ -610,6 +657,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(KEY_DATE, thyroid.getDate());
         values.put(KEY_TIME, thyroid.getTime());
         values.put(KEY_TSH_LEVEL, thyroid.getTshLevel());
+        values.put(KEY_IMAGE, thyroid.getbyteArray());
+
         return db.update(TABLE_THYROID, values, KEY_ROWID + " = ?",
                 new String[]{String.valueOf(thyroid.getRowId())});
     }
@@ -689,6 +738,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 weight.setDate(cursor.getString(7));
                 weight.setTime(cursor.getString(8));
                 weight.setHips(cursor.getFloat(9));
+                weight.setByteArray(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
                 weightArrayList.add(weight);
             } while (cursor.moveToNext());
 
@@ -717,6 +767,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 glucose.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
                 glucose.setTestingTime(cursor.getString(cursor.getColumnIndex(KEY_TESTING_TIME)));
                 glucose.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
+                glucose.setByteArray(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+
                 glucoseArrayList.add(glucose);
             } while (cursor.moveToNext());
 
@@ -744,6 +796,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 bloodPresure.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
                 bloodPresure.setDiastolic(cursor.getInt(cursor.getColumnIndex(KEY_DIASTOLIC)));
                 bloodPresure.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
+                bloodPresure.setByteArray(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+
                 bloodPresureArrayList.add(bloodPresure);
             } while (cursor.moveToNext());
 
@@ -772,6 +826,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cholesterol.setTotal(cursor.getInt(cursor.getColumnIndex(KEY_TOTAL)));
                 cholesterol.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
                 cholesterol.setTriglyceride(cursor.getFloat(cursor.getColumnIndex(KEY_TRIGLYCERIDES)));
+                cholesterol.setByteArray(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+
                 cholesterolArrayList.add(cholesterol);
             } while (cursor.moveToNext());
 
@@ -797,6 +853,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 thyroid.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
                 thyroid.setTime(cursor.getString(cursor.getColumnIndex(KEY_TIME)));
                 thyroid.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
+                thyroid.setByteArray(cursor.getString(cursor.getColumnIndex(KEY_IMAGE)));
+
                 bloodPresureArrayList.add(thyroid);
             } while (cursor.moveToNext());
 

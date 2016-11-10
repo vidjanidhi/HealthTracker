@@ -2,7 +2,6 @@ package com.healthtracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -23,7 +22,7 @@ import com.healthtracker.util.Util;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class EditLogActivity extends AppCompatActivity implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener, RadialTimePickerDialogFragment.OnTimeSetListener {
+public class EditLogActivity extends ActionBarBaseActivitiy implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener, RadialTimePickerDialogFragment.OnTimeSetListener {
 
     private MyFontTextView tvDate;
     private MyFontTextView tvTime;
@@ -47,6 +46,9 @@ public class EditLogActivity extends AppCompatActivity implements View.OnClickLi
         log_entry_id = getIntent().getExtras().getInt(AppConstant.LOG_ENTRY_ID);
         dataBaseHelper = new DataBaseHelper(this);
         preferenceHelper = new PreferenceHelper(this);
+
+        setTitle(getString(R.string.app_name) + "-" + dataBaseHelper.getUser(preferenceHelper.getInteger(AppConstant.USER_ID)).getUserName());
+
         getView();
         LogEntry logEntry = dataBaseHelper.getLogEntryFromId(log_entry_id);
         rowId = logEntry.getRowId();
@@ -160,6 +162,7 @@ public class EditLogActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-        tvTime.setText(hourOfDay + ":" + minute);
+        boolean isPM = (hourOfDay >= 12);
+        tvTime.setText(String.format("%02d:%02d %s", (hourOfDay == 12 || hourOfDay == 0) ? 12 : hourOfDay % 12, minute, isPM ? "PM" : "AM"));
     }
 }

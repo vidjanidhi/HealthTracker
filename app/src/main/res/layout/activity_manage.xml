@@ -27,7 +27,7 @@
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send User Data By Email" />
+                android:text="Email User Data" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,7 +108,7 @@
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Erase All" />
+                android:text="Erase All Data" />
         </LinearLayout>
 
 
@@ -130,7 +130,7 @@
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Import Data" />
+                android:text="Import" />
         </LinearLayout>
 
         <LinearLayout
@@ -235,7 +235,7 @@
                 style="@style/manage_screen_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date Formate" />
+                android:text="Date Format" />
         </LinearLayout>
 
     </LinearLayout>

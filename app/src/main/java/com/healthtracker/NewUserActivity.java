@@ -2,11 +2,11 @@ package com.healthtracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.healthtracker.component.MyFontButton;
@@ -16,10 +16,11 @@ import com.healthtracker.helper.DataBaseHelper;
 import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.model.User;
 import com.healthtracker.util.AppConstant;
+import com.healthtracker.util.Util;
 
 import java.util.Calendar;
 
-public class NewUserActivity extends AppCompatActivity implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener {
+public class NewUserActivity extends ActionBarBaseActivitiy implements View.OnClickListener, CalendarDatePickerDialogFragment.OnDateSetListener {
 
     private MyFontEdittextView etNewuserUsername;
     private RadioGroup radioSex;
@@ -34,6 +35,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     DataBaseHelper dbhelper;
     boolean activityEdit = false;
     int date, month, year, edit_userId = 0;
+    private boolean IsDateOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
             activityEdit = true;
         }
         findviews();
+        setTitle(getString(R.string.app_name));
         phelper = new PreferenceHelper(this);
         dbhelper = new DataBaseHelper(this);
         int lengthSeleted = phelper.getInteger(AppConstant.LENGTH_SELECTED);
@@ -88,26 +91,31 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_newuser_save:
-                User user = new User();
-                user.setUserName(etNewuserUsername.getText().toString());
-                user.setHeight(Integer.parseInt(etNewuserHeight.getText().toString()));
-                user.setAge(year, month, date);
-                int selectedId = radioSex.getCheckedRadioButtonId();
-                if ((selectedId == R.id.radioMale)) {
-                    user.setGender(User.MALE);
-                } else {
-                    user.setGender(User.FEMALE);
-                }
-                if (activityEdit) {
-                    dbhelper.updateUser(user);
+                if (setAllDetails()) {
+                    User user = new User();
+                    user.setUserName(etNewuserUsername.getText().toString());
+                    user.setHeight(Integer.parseInt(etNewuserHeight.getText().toString()));
+                    user.setAge(year, month, date);
+                    int selectedId = radioSex.getCheckedRadioButtonId();
+                    if ((selectedId == R.id.radioMale)) {
+                        user.setGender(User.MALE);
+                    } else {
+                        user.setGender(User.FEMALE);
+                    }
+                    if (activityEdit) {
+                        dbhelper.updateUser(user);
 
+                    } else {
+                        int userid = dbhelper.addUser(user);
+                        Log.i("user id", userid + "");
+                    }
+
+                    Intent intent1 = new Intent(this, MainActivity.class);
+                    startActivity(intent1);
                 } else {
-                    int userid = dbhelper.addUser(user);
-                    Log.i("user id", userid + "");
+                    Toast.makeText(this, "Enter All Details Right", Toast.LENGTH_LONG).show();
                 }
 
-                Intent intent1 = new Intent(this, MainActivity.class);
-                startActivity(intent1);
                 break;
 
             case R.id.btn_newuser_cancel:
@@ -131,15 +139,38 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private boolean setAllDetails() {
+        if (IsDateOk) {
+            if (!etNewuserUsername.getText().toString().isEmpty()) {
+                if (!etNewuserHeight.getText().toString().isEmpty()) {
+                    if (!etNewuserAge.getText().toString().isEmpty()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else
+                    return false;
+
+            } else {
+                return false;
+            }
+        } else return false;
+
+    }
+
     @Override
     public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
         date = dayOfMonth;
         month = monthOfYear;
         this.year = year;
-        if (phelper.getInteger(AppConstant.DATE_SELECTED) == AppConstant.DATE_SELECTED_UNIT_DMY) {
-            etNewuserAge.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
-        } else {
-            etNewuserAge.setText(monthOfYear + "/" + dayOfMonth + "/" + year);
-        }
+        if (Util.getDaysDifference(dayOfMonth + "/" + monthOfYear + "/" + year) > 0) {
+            IsDateOk = true;
+            if (phelper.getInteger(AppConstant.DATE_SELECTED) == AppConstant.DATE_SELECTED_UNIT_DMY) {
+                etNewuserAge.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+            } else {
+                etNewuserAge.setText(monthOfYear + "/" + dayOfMonth + "/" + year);
+            }
+        } else IsDateOk = false;
+
     }
 }

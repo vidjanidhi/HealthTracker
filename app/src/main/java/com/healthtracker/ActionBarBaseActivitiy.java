@@ -14,7 +14,7 @@ import com.healthtracker.component.MyFontTextView;
 
 abstract public class ActionBarBaseActivitiy extends AppCompatActivity {
 
-    public ActionBar actionBar;
+    static ActionBar actionBar;
     public MyFontTextView tvTitle;
 
     @Override
@@ -31,6 +31,8 @@ abstract public class ActionBarBaseActivitiy extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         tvTitle = (MyFontTextView) customActionBarView
                 .findViewById(R.id.tvTitle);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         try {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
@@ -39,10 +41,16 @@ abstract public class ActionBarBaseActivitiy extends AppCompatActivity {
             actionBar.setCustomView(customActionBarView,
                     new ActionBar.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT));
+                            ViewGroup.LayoutParams.WRAP_CONTENT));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     public void setStatusBarColor(int color) {

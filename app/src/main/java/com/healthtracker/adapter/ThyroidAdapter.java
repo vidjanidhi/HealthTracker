@@ -1,16 +1,22 @@
 package com.healthtracker.adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 import com.healthtracker.R;
 import com.healthtracker.component.MyFontTextView;
 import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.model.Thyroid;
+import com.healthtracker.util.AppConstant;
+import com.healthtracker.util.Util;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -62,14 +68,22 @@ public class ThyroidAdapter extends BaseAdapter {
 
             holder.tvThyroidItemDate = (MyFontTextView) convertView.findViewById(R.id.tv_thyroid_item_date);
             holder.tvThyroidItemTshlevel = (MyFontTextView) convertView.findViewById(R.id.tv_thyroid_item_tshlevel);
+            holder.imgUpload = (ImageView) convertView.findViewById(R.id.img_upload);
 
 
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         Thyroid thyroid = thyroidArrayList.get(position);
-        holder.tvThyroidItemDate.setText(thyroid.getDate());
-        holder.tvThyroidItemTshlevel.setText(thyroid.getTshLevel() + "");
+        holder.tvThyroidItemDate.setText(Util.getFormatedDate(thyroid.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
+        if (thyroid.getbyteArray() != null) {
+            File f = new File(thyroid.getbyteArray());
+            Bitmap b = BitmapFactory.decodeFile(f.getAbsolutePath());
+            holder.imgUpload.setImageBitmap(b);
+        }
+        if (thyroid.getTshLevel() != 0)
+            holder.tvThyroidItemTshlevel.setText(thyroid.getTshLevel() + "");
+        else holder.tvThyroidItemTshlevel.setText("--");
         return convertView;
     }
 
@@ -77,6 +91,7 @@ public class ThyroidAdapter extends BaseAdapter {
 
         private MyFontTextView tvThyroidItemDate;
         private MyFontTextView tvThyroidItemTshlevel;
+        public ImageView imgUpload;
 
     }
 

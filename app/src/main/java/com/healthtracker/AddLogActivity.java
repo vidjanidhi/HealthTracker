@@ -1,20 +1,29 @@
 package com.healthtracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.healthtracker.adapter.PagerAdapterForAddLog;
+import com.healthtracker.helper.DataBaseHelper;
+import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.util.AppConstant;
 
-public class AddLogActivity extends AppCompatActivity {
+public class AddLogActivity extends ActionBarBaseActivitiy {
     int tabId = 100;
+    DataBaseHelper dbhelper;
+    PreferenceHelper phelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_log);
+
+        dbhelper = new DataBaseHelper(this);
+        phelper = new PreferenceHelper(this);
+        setTitle(getString(R.string.app_name) + "-" + dbhelper.getUser(phelper.getInteger(AppConstant.USER_ID)).getUserName());
+
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout_add_log);
         if (getIntent().getExtras() != null) {
@@ -53,5 +62,12 @@ public class AddLogActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

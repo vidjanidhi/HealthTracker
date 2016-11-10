@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +65,14 @@ public class DisplayLogListFragment extends Fragment {
         logEntryArrayList = dataBaseHelper.getAllLogEntry(preferenceHelper.getInteger(AppConstant.USER_ID));
         final ArrayList<LogEntry> logEntryArrayListForType = getSelectedTypeLog();
         if (logEntryArrayListForType.size() > 0) {
+            Log.i("displayloglist", "not null");
+            Log.i("listfor type size", logEntryArrayListForType.size() + "");
             if (days != 100) {
+                Log.i("display log list", "for " + days + " days");
                 final ArrayList<LogEntry> logEntryArrayListForDays = getSelectedDayLog(days, logEntryArrayListForType);
                 if (logEntryArrayListForDays.size() > 0) {
                     displayLogListAdapter = new DisplayLogListAdapter(getActivity(), logEntryArrayListForDays);
+                    Log.i("log list size", logEntryArrayListForDays.size() + "");
                     lstLogs.setAdapter(displayLogListAdapter);
                     lstLogs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -80,7 +85,9 @@ public class DisplayLogListFragment extends Fragment {
                     });
                 }
             } else {
+                Log.i("display log list", "for " + days + " days");
                 displayLogListAdapter = new DisplayLogListAdapter(getActivity(), logEntryArrayListForType);
+                Log.i("log list size", logEntryArrayListForType.size() + "");
                 lstLogs.setAdapter(displayLogListAdapter);
                 lstLogs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -131,11 +138,6 @@ public class DisplayLogListFragment extends Fragment {
         }
         return logEntryArrayListForType;
     }
-
-    void getList(int id) {
-
-    }
-
     ArrayList<LogEntry> getSelectedDayLog(int days, ArrayList<LogEntry> logEntryArrayList) {
         ArrayList<LogEntry> logEntryArrayListForDays = new ArrayList<LogEntry>();
         for (int i = 0; i < logEntryArrayList.size(); i++) {

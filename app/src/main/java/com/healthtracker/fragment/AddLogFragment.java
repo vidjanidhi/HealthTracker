@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +79,6 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         spinner = (Spinner) view.findViewById(R.id.spinner_for_time);
-
         tvDate = (MyFontTextView) view.findViewById(R.id.tv_date);
         tvTime = (MyFontTextView) view.findViewById(R.id.tv_time);
         llFragment = (LinearLayout) view.findViewById(R.id.ll_fragment);
@@ -92,8 +92,8 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
         btnCancel.setOnClickListener(this);
         tvDate.setOnClickListener(this);
         tvTime.setOnClickListener(this);
-        date = Util.getToday();
-        Log.i("today date", date);
+        date = Util.getToday(phelper.getInteger(AppConstant.DATE_SELECTED));
+        Log.i("add log frag today date", date);
         tvDate.setText(date);
         ArrayList<String> timeList = new ArrayList<String>();
 
@@ -165,7 +165,6 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_save:
-
                 switch (fragment_id) {
                     case AppConstant.MED_FRAGMENT:
                         selectedLogList = AddMeditationActivity.selectedMeditationList;
@@ -178,10 +177,11 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
                         break;
                 }
                 if (selectedLogList.size() > 0) {
+                    Log.i("addlogfragment", "selected log list not null");
                     for (int i = 0; i < selectedLogList.size(); i++) {
                         View view = getViewByPosition(i, lstSelectedItems);
                         MyFontEdittextView et = (MyFontEdittextView) view.findViewById(R.id.et_selected_med_quantity);
-                        if (et.getText().toString() == null) {
+                        if (TextUtils.isEmpty(et.getText().toString())) {
                             Toast.makeText(this.getActivity(), "enter quantity first", Toast.LENGTH_LONG).show();
                         } else {
                             LogEntry logEntry = new LogEntry();
@@ -193,7 +193,7 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
                             logEntry.setRowId(selectedLogList.get(i).getRowId());
                             logEntry.setQuantity(Integer.parseInt(et.getText().toString()));
                             int id = dbhelper.addLogEntry(logEntry);
-                            Log.i("id", id + "");
+                            Log.i("add log frag id", id + "");
                             if (id > 0) {
                                 Intent intent = new Intent(this.getActivity(), MainActivity.class);
                                 startActivity(intent);
@@ -201,21 +201,25 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
                         }
                     }
                 } else {
+                    if (fragment_id == AppConstant.MIS_FRAGMENT) {
 
-                    LogEntry logEntry = new LogEntry();
-                    logEntry.setUserId(phelper.getInteger(AppConstant.USER_ID));
-                    logEntry.setDate(tvDate.getText().toString());
-                    logEntry.setTime(tvTime.getText().toString());
-                    logEntry.setNote(etNote.getText().toString());
-                    com.healthtracker.model.Log log = new com.healthtracker.model.Log();
-                    log.setLogId(AppConstant.MIS_FRAGMENT);
-                    int rowid = dbhelper.addLog(log);
-                    logEntry.setRowId(rowid);
-                    int id = dbhelper.addLogEntry(logEntry);
-                    Log.i("id", id + "");
-                    if (id > 0) {
-                        Intent intent = new Intent(this.getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        LogEntry logEntry = new LogEntry();
+                        logEntry.setUserId(phelper.getInteger(AppConstant.USER_ID));
+                        logEntry.setDate(tvDate.getText().toString());
+                        logEntry.setTime(tvTime.getText().toString());
+                        logEntry.setNote(etNote.getText().toString());
+                        com.healthtracker.model.Log log = new com.healthtracker.model.Log();
+                        log.setLogId(AppConstant.MIS_FRAGMENT);
+                        int rowid = dbhelper.addLog(log);
+                        logEntry.setRowId(rowid);
+                        int id = dbhelper.addLogEntry(logEntry);
+                        Log.i("add log frag id", id + "");
+                        if (id > 0) {
+                            Intent intent = new Intent(this.getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "plaese choose any log first.", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -295,6 +299,7 @@ public class AddLogFragment extends Fragment implements View.OnClickListener, Ca
 
     @Override
     public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
-        tvTime.setText(hourOfDay + ":" + minute);
+        boolean isPM = (hourOfDay >= 12);
+        tvTime.setText(String.format("%02d:%02d %s", (hourOfDay == 12 || hourOfDay == 0) ? 12 : hourOfDay % 12, minute, isPM ? "PM" : "AM"));
     }
 }

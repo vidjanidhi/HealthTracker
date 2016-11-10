@@ -8,6 +8,16 @@ public class Weight {
     float weight, Abdomen, waist, hips;
     int fat, userId, rowId;
 
+    public void setByteArray(String byteArray) {
+        this.ImagePath = byteArray;
+    }
+
+    public String ImagePath;
+
+    public String getbyteArray() {
+        return ImagePath;
+    }
+
     public int getRowId() {
         return rowId;
     }

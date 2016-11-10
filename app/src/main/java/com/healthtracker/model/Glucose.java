@@ -9,6 +9,18 @@ public class Glucose {
     String note, date, time, testingTime;
     int userId, rowId;
 
+    public void setByteArray(String byteArray) {
+        this.ImagePath = byteArray;
+    }
+
+    public String ImagePath;
+
+    public String getbyteArray() {
+        return ImagePath;
+    }
+
+
+
     public int getRowId() {
         return rowId;
     }

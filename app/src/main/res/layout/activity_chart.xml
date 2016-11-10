@@ -95,6 +95,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_cholestrol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -123,6 +124,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_thyroid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,7 +144,9 @@
                     android:layout_height="wrap_content"
                     android:text="Thyroid" />
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/ll_weight_bp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -185,7 +189,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/ll_weight3"
+                android:id="@+id/ll_weight_glucose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -222,7 +226,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_weight13"
+                android:id="@+id/ll_weight_cholestrol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -255,42 +259,54 @@
                     style="@style/activity_main_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Weight+Colesterol" />
+                    android:text="Weight+Cholesterol" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_weight_thyroid"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="horizontal">
 
             <LinearLayout
-                style="@style/activity_main_image"
-                android:layout_width="wrap_content"
+                android:id="@+id/ll_weight_thyroid"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <ImageView
+                <LinearLayout
+                    style="@style/activity_main_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/weight" />
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                <ImageView
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/weight" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/thyroid" />
+                </LinearLayout>
+
+                <com.healthtracker.component.MyFontTextView
+                    style="@style/activity_main_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/thyroid" />
+                    android:text="Weight+Thyroid" />
             </LinearLayout>
-
             <com.healthtracker.component.MyFontTextView
                 style="@style/activity_main_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Weight+Thyroid" />
+                android:layout_weight="1"
+                android:text="                 " />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

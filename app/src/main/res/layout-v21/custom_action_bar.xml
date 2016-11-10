@@ -3,18 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Toolbar
-        android:id="@+id/toolbar"
+    <com.healthtracker.component.MyFontTextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/colorPrimary"
-        android:minHeight="?android:attr/actionBarSize">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/color_white"
+        android:text="@string/app_name" />
 
-        <com.healthtracker.component.MyFontTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/app_name" />
-    </Toolbar>
 </RelativeLayout>

@@ -112,5 +112,18 @@ public class AppConstant {
     public static String ACTIVITY_SELECTED = "activity_selected";
     public static String MIS_SELECTED = "mis_selected";
 
+    //chart activity
+
+    public static final String CHART_ID = "chart_id";
+    public static final int CHART_WEIGHT = 1;
+    public static final int CHART_GLUCOSE = 2;
+    public static final int CHART_CHOLESTROL = 3;
+    public static final int CHART_B_P = 4;
+    public static final int CHART_THYROID = 5;
+    public static final int CHART_WEIGHT_GLUCOSE = 6;
+    public static final int CHART_WEIGHT_CHOLESTROL = 7;
+    public static final int CHART_WEIGHT_B_P = 8;
+    public static final int CHART_WEIGHT_THYROID = 9;
+
 
 }

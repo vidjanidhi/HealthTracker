@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:background="@drawable/border" />
+            android:background="@drawable/border_for_spinner" />
 
         <LinearLayout
             android:id="@+id/ll_fragment"

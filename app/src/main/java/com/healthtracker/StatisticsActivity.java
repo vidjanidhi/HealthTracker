@@ -1,7 +1,7 @@
 package com.healthtracker;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -10,16 +10,20 @@ import android.widget.Toast;
 import com.healthtracker.component.MyFontButton;
 import com.healthtracker.component.MyFontEdittextView;
 import com.healthtracker.component.MyFontTextView;
+import com.healthtracker.helper.DataBaseHelper;
+import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.model.BloodPresure;
 import com.healthtracker.model.Glucose;
 import com.healthtracker.model.Thyroid;
 import com.healthtracker.model.Weight;
 import com.healthtracker.model.cholesterol;
+import com.healthtracker.util.AppConstant;
+import com.healthtracker.util.UnitHelper;
 import com.healthtracker.util.Util;
 
 import java.util.ArrayList;
 
-public class StatisticsActivity extends AppCompatActivity implements View.OnClickListener {
+public class StatisticsActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
     MyFontButton btnStatisticsWeek;
     MyFontButton btnStatisticsMonth;
     MyFontButton btnStatisticsSixMonth;
@@ -55,11 +59,24 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
     MyFontTextView tvStatisticsTriglyceride;
     MyFontTextView tvStatisticsTshLevelUnit;
     MyFontTextView tvStatisticsTshLevel;
+    DataBaseHelper dataBaseHelper;
+    PreferenceHelper preferenceHelper;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+        dataBaseHelper = new DataBaseHelper(this);
+        preferenceHelper = new PreferenceHelper(this);
+        setTitle(getString(R.string.app_name) + "-" + dataBaseHelper.getUser(preferenceHelper.getInteger(AppConstant.USER_ID)).getUserName());
+
         findviews();
         tvStatisticsHdl.setText("No Data");
         tvStatisticsLdl.setText("No Data");
@@ -100,11 +117,15 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
                 updateUI(180);
                 break;
             case R.id.btn_statistics_calculate:
-                int days = Integer.parseInt(etStatisticsDays.getText().toString());
-                if (days > 0) {
-                    updateUI(days);
+                if (!TextUtils.isEmpty(etStatisticsDays.getText().toString())) {
+                    int days = Integer.parseInt(etStatisticsDays.getText().toString());
+                    if (days > 0) {
+                        updateUI(days);
+                    } else {
+                        Toast.makeText(this, "enter valid days", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(this, "enter valid days", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Enter days first.", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -263,8 +284,12 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         }
         if (glucoseArrayList.size() > 0) {
             Glucose glucose = getAverageGlucose(glucoseArrayList);
-            tvStatisticsGlucose.setText(glucose.getGlucose() + "");
             tvStatisticsHba1c.setText(glucose.getHba1c() + "");
+            if (preferenceHelper.getInteger(AppConstant.GLUCOSE_SELECTED) == AppConstant.GLUCOSE_SELECTED_UNIT_MMOL_PER_L) {
+                tvStatisticsGlucose.setText(glucose.getGlucose() + "");
+            } else {
+                tvStatisticsGlucose.setText(UnitHelper.mmolToMg(Float.parseFloat(glucose.getGlucose() + "")) + "");
+            }
 
         } else {
             tvStatisticsGlucose.setText("No Data");
@@ -305,11 +330,22 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         }
         if (weightArrayList.size() > 0) {
             Weight weight = getAverageWeight(weightArrayList);
-            tvStatisticsAbdomen.setText(weight.getAbdomen() + "");
             tvStatisticsFat.setText(weight.getFat() + "");
-            tvStatisticsWeight.setText(weight.getWeight() + "");
-            tvStatisticsWaist.setText(weight.getWaist() + "");
-            tvStatisticsHip.setText(weight.getHips() + "");
+            if (preferenceHelper.getInteger(AppConstant.WEIGHT_SELECTED) == AppConstant.WEIGHT_SELECTED_UNIT_KG) {
+                tvStatisticsWeight.setText(weight.getWeight() + "");
+            } else {
+                tvStatisticsWeight.setText(UnitHelper.kgToLbsConverter(Float.parseFloat(weight.getWeight() + "")) + "");
+            }
+            if (preferenceHelper.getInteger(AppConstant.LENGTH_SELECTED) == AppConstant.LENGTH_SELECTED_UNIT_CM) {
+                tvStatisticsAbdomen.setText(weight.getAbdomen() + "");
+                tvStatisticsWaist.setText(weight.getWaist() + "");
+                tvStatisticsHip.setText(weight.getHips() + "");
+            } else {
+
+                tvStatisticsAbdomen.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getAbdomen() + "")) + "");
+                tvStatisticsWaist.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getWaist() + "")) + "");
+                tvStatisticsHip.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getHips() + "")) + "");
+            }
         } else {
             tvStatisticsAbdomen.setText("No Data");
             tvStatisticsFat.setText("No Data");

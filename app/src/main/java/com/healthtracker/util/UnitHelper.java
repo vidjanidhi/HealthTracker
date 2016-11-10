@@ -17,8 +17,8 @@ public class UnitHelper {
         }
     }
 
-    public static double mgToMmol(float mg) {
-        return format(mg * 0.0555);
+    public static float mgToMmol(float mg) {
+        return (float) format(mg * 0.0555);
 
     }
 
@@ -26,13 +26,13 @@ public class UnitHelper {
         return format(mmol * 18.0182);
     }
 
-    public static double lbsToKgConverter(double lb) {
-        return format(lb * 0.45359237);
+    public static float lbsToKgConverter(float lb) {
+        return (float) format(lb * 0.45359237);
     }
 
 
-    public static double kgToLbsConverter(double kg) {
-        return format(kg * 2.20462262);
+    public static float kgToLbsConverter(double kg) {
+        return (float) format(kg * 2.20462262);
     }
 
 
@@ -41,8 +41,8 @@ public class UnitHelper {
     }
 
 
-    public static double inchToCmConverter(double inch) {
-        return format(inch * 2.54);
+    public static float inchToCmConverter(double inch) {
+        return (float) format(inch * 2.54);
     }
 
 

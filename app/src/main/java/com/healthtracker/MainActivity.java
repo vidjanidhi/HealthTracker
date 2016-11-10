@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.healthtracker.helper.DataBaseHelper;
 import com.healthtracker.helper.PreferenceHelper;
 import com.healthtracker.model.BloodPresure;
@@ -33,11 +35,12 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
     LinearLayout llDiary;
     LinearLayout llChart;
     LinearLayout llLogs;
-    LinearLayout llAddlogs;
     LinearLayout llStatistics;
     LinearLayout llManage;
     DataBaseHelper dbhelper;
     PreferenceHelper phelper;
+
+    private AdView mAdView;
 
     public static ArrayList<Weight> WeightList;
     public static ArrayList<Glucose> glucoseArrayList;
@@ -55,7 +58,6 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
         llDiary = (LinearLayout) findViewById(R.id.ll_diary);
         llChart = (LinearLayout) findViewById(R.id.ll_chart);
         llLogs = (LinearLayout) findViewById(R.id.ll_logs);
-        llAddlogs = (LinearLayout) findViewById(R.id.ll_addlogs);
         llStatistics = (LinearLayout) findViewById(R.id.ll_statistics);
         llManage = (LinearLayout) findViewById(R.id.ll_manage);
         llWeight.setOnClickListener(this);
@@ -64,19 +66,25 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
         llGlucose.setOnClickListener(this);
         llThyroid.setOnClickListener(this);
         llLogs.setOnClickListener(this);
-        llAddlogs.setOnClickListener(this);
         llStatistics.setOnClickListener(this);
         llManage.setOnClickListener(this);
         llChart.setOnClickListener(this);
         llDiary.setOnClickListener(this);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Health tracker");
+        setTitle(getString(R.string.app_name));
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         findViews();
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
         dbhelper = new DataBaseHelper(this);
         phelper = new PreferenceHelper(this);
         setUsersList();
@@ -85,21 +93,27 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
 
     private void checkPreferencesForUnits() {
         if (!phelper.is_exist(AppConstant.LENGTH_SELECTED)) {
-            phelper.setInteger(AppConstant.LENGTH_SELECTED, AppConstant.LENGTH_SELECTED_UNIT_CM);
+            phelper.setInteger(AppConstant.LENGTH_SELECTED, AppConstant.LENGTH_SELECTED_UNIT_INCH);
         }
         if (!phelper.is_exist(AppConstant.WEIGHT_SELECTED)) {
-            phelper.setInteger(AppConstant.WEIGHT_SELECTED, AppConstant.WEIGHT_SELECTED_UNIT_KG);
+            phelper.setInteger(AppConstant.WEIGHT_SELECTED, AppConstant.WEIGHT_SELECTED_UNIT_POUNDS);
         }
         if (!phelper.is_exist(AppConstant.GLUCOSE_SELECTED)) {
-            phelper.setInteger(AppConstant.GLUCOSE_SELECTED, AppConstant.GLUCOSE_SELECTED_UNIT_MMOL_PER_L);
+            phelper.setInteger(AppConstant.GLUCOSE_SELECTED, AppConstant.GLUCOSE_SELECTED_UNIT_MG_PER_DL);
         }
         if (!phelper.is_exist(AppConstant.HBA1C_SELECTED)) {
-            phelper.setInteger(AppConstant.HBA1C_SELECTED, AppConstant.HBA1C_SELECTED_UNIT_DCCT);
+            phelper.setInteger(AppConstant.HBA1C_SELECTED, AppConstant.HBA1C_SELECTED_UNIT_IFFC);
         }
         if (!phelper.is_exist(AppConstant.DATE_SELECTED)) {
-            phelper.setInteger(AppConstant.DATE_SELECTED, AppConstant.DATE_SELECTED_UNIT_DMY);
+            phelper.setInteger(AppConstant.DATE_SELECTED, AppConstant.DATE_SELECTED_UNIT_MDY);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
     }
 
     private void setUsersList() {
@@ -117,6 +131,9 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
         setUsersList();
         WeightList = dbhelper.getAllWeight(phelper.getInteger(AppConstant.USER_ID));
         glucoseArrayList = dbhelper.getAllGlucose(phelper.getInteger(AppConstant.USER_ID));
@@ -151,10 +168,6 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
                 case R.id.ll_logs:
                     Intent intentlog = new Intent(this, LogDisplayActivity.class);
                     startActivity(intentlog);
-                    break;
-                case R.id.ll_addlogs:
-                    Intent intent_add_log = new Intent(this, AddLogActivity.class);
-                    startActivity(intent_add_log);
                     break;
                 case R.id.ll_chart:
                     Intent intent2 = new Intent(this, ChartActivity.class);
@@ -191,18 +204,16 @@ public class MainActivity extends ActionBarBaseActivitiy implements View.OnClick
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
             phelper.setInteger(AppConstant.USER_ID, dbhelper.getUserIdFromPosition(pos));
-            Toast.makeText(parent.getContext(),
-                    "You have selected : " + parent.getItemAtPosition(pos).toString(),
-                    Toast.LENGTH_LONG).show();
+//            Toast.makeText(parent.getContext(),
+//                    "You have selected : " + parent.getItemAtPosition(pos).toString(),
+//                    Toast.LENGTH_LONG).show();
             // Todo when item is selected by the user
-
         }
 
 
         @Override
         public void onNothingSelected(AdapterView<?> arg) {
             Toast.makeText(arg.getContext(), "please select any user", Toast.LENGTH_LONG).show();
-
         }
     }
 }

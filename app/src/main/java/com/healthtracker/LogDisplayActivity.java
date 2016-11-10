@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -25,7 +24,7 @@ import com.healthtracker.util.AppConstant;
 
 import java.util.ArrayList;
 
-public class LogDisplayActivity extends AppCompatActivity implements View.OnClickListener {
+public class LogDisplayActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
     MyFontButton btnToday;
     MyFontButton btnList;
     MyFontButton btnMonth;
@@ -47,6 +46,8 @@ public class LogDisplayActivity extends AppCompatActivity implements View.OnClic
         updateUI();
         dataBaseHelper = new DataBaseHelper(this);
         preferenceHelper = new PreferenceHelper(this);
+        setTitle(getString(R.string.app_name) + "-" + dataBaseHelper.getUser(preferenceHelper.getInteger(AppConstant.USER_ID)).getUserName());
+
         if (!preferenceHelper.is_exist(AppConstant.DAY_SELECTED)) {
             preferenceHelper.setInteger(AppConstant.DAY_SELECTED, 0);
             btnDays.setText(items[0]);
@@ -55,6 +56,13 @@ public class LogDisplayActivity extends AppCompatActivity implements View.OnClic
         }
         logEntryArrayList = dataBaseHelper.getAllLogEntry(preferenceHelper.getInteger(AppConstant.USER_ID));
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     void findViews() {
@@ -128,8 +136,6 @@ public class LogDisplayActivity extends AppCompatActivity implements View.OnClic
                     }
                 });
                 dialog.show();
-
-
                 break;
             case R.id.btn_days:
                 int selectedItem = preferenceHelper.getInteger(AppConstant.DAY_SELECTED);

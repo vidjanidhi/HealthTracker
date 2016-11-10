@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,7 +22,7 @@ import com.healthtracker.util.AppConstant;
 
 import java.util.ArrayList;
 
-public class AddMeditationActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddMeditationActivity extends ActionBarBaseActivitiy implements View.OnClickListener {
 
     Activity activity;
     DataBaseHelper dbhelper;
@@ -50,6 +49,8 @@ public class AddMeditationActivity extends AppCompatActivity implements View.OnC
         fragment_id = getIntent().getIntExtra(AppConstant.FRAGMENT_ID, 1);
         dbhelper = new DataBaseHelper(activity);
         phelper = new PreferenceHelper(activity);
+        setTitle(getString(R.string.app_name) + "-" + dbhelper.getUser(phelper.getInteger(AppConstant.USER_ID)).getUserName());
+
 
         btnMedDone = (MyFontButton) findViewById(R.id.btn_med_done);
         tvMedTitle = (MyFontTextView) findViewById(R.id.tv_med_title);

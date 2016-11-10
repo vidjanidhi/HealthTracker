@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "162520527134",
+    "firebase_url": "https://admob-app-id-3440071631.firebaseio.com",
+    "project_id": "admob-app-id-3440071631",
+    "storage_bucket": "admob-app-id-3440071631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162520527134:android:8a5e1c7ea6eec3e7",
+        "android_client_info": {
+          "package_name": "com.healthtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162520527134-32frrblmvqeju2rbhnlg8uiha9dim8eb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhKRm9Ka-ykdn_vIdlKnXt6m-tVi4Ouzk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

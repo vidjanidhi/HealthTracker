@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -32,6 +33,12 @@ import com.healthtracker.model.Thyroid;
 import com.healthtracker.model.Weight;
 import com.healthtracker.model.cholesterol;
 import com.healthtracker.util.AppConstant;
+import com.healthtracker.util.UnitHelper;
+import com.healthtracker.util.Util;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class WeightDairyFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
@@ -204,34 +211,26 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
                     case AppConstant.GLUCOSE_FRAGMENT:
                         dbhelper.deleteGlucose(MainActivity.glucoseArrayList.get(position).getRowId());
                         MainActivity.WeightList.remove(position);
-
                         glucoseListItemAdapter.notifyDataSetChanged();
                         dialog.cancel();
-
                         break;
                     case AppConstant.B_P_FRAGMENT:
                         dbhelper.deleteBP(MainActivity.bloodPresureArrayList.get(position).getRowId());
                         MainActivity.WeightList.remove(position);
-
                         bpAdapter.notifyDataSetChanged();
                         dialog.cancel();
-
                         break;
                     case AppConstant.CHOLESTROL_FRAGMENT:
                         dbhelper.deleteCholesterol(MainActivity.cholesterolArrayList.get(position).getRowId());
                         MainActivity.WeightList.remove(position);
-
                         cholestrolAdapter.notifyDataSetChanged();
                         dialog.cancel();
-
                         break;
                     case AppConstant.THYROID_FRAGMENT:
                         dbhelper.deleteThyroid(MainActivity.thyroidArrayList.get(position).getRowId());
                         MainActivity.WeightList.remove(position);
-
                         thyroidAdapter.notifyDataSetChanged();
                         dialog.cancel();
-
                         break;
                 }
             }
@@ -248,12 +247,15 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         MyFontTextView tvDialogWeightNote;
         MyFontButton btnDialogCancel;
         MyFontButton btnDialogEdit;
+        ImageView imgDiary;
         tvDialogGlucoseDate = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_glucose_date);
         tvDialogGlucoseTime = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_glucose_time);
         tvDialogThyroidTshlevel = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_thyroid_tshlevel);
         tvDialogWeightNote = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_weight_note);
         btnDialogCancel = (MyFontButton) dialog.findViewById(R.id.btn_dialog_caancel);
         btnDialogEdit = (MyFontButton) dialog.findViewById(R.id.btn_dialog_edit);
+        imgDiary = (ImageView) dialog.findViewById(R.id.img_for_diary);
+
 
         btnDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,10 +274,16 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
             }
         });
         Thyroid thyroid = MainActivity.thyroidArrayList.get(position);
-        tvDialogGlucoseDate.setText(thyroid.getDate());
+        Picasso.with(context).load(new File(thyroid.getbyteArray()))
+                .error(R.drawable.bp)
+                .placeholder(R.drawable.bp).fit()
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgDiary);
+        tvDialogGlucoseDate.setText(Util.getFormatedDate(thyroid.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
         tvDialogGlucoseTime.setText(thyroid.getTime());
         tvDialogWeightNote.setText(thyroid.getNote());
-        tvDialogThyroidTshlevel.setText(thyroid.getTshLevel() + "");
+        if (thyroid.getTshLevel() != 0)
+            tvDialogThyroidTshlevel.setText(thyroid.getTshLevel() + "");
+        else tvDialogThyroidTshlevel.setText("--");
         dialog.show();
     }
 
@@ -289,6 +297,8 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         MyFontTextView tvDialogWeightNote;
         MyFontButton btnDialogCancel;
         MyFontButton btnDialogEdit;
+        ImageView imgDiary;
+
         tvDialogBpDate = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_bp_date);
         tvDialogBpTime = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_bp_time);
         tvDialogCHdl = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_c_hdl);
@@ -298,6 +308,7 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         tvDialogWeightNote = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_weight_note);
         btnDialogCancel = (MyFontButton) dialog.findViewById(R.id.btn_dialog_caancel);
         btnDialogEdit = (MyFontButton) dialog.findViewById(R.id.btn_dialog_edit);
+        imgDiary = (ImageView) dialog.findViewById(R.id.img_for_diary);
         btnDialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -316,13 +327,25 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
             }
         });
         cholesterol cholesterol = MainActivity.cholesterolArrayList.get(position);
-        tvDialogBpDate.setText(cholesterol.getDate());
+        tvDialogBpDate.setText(Util.getFormatedDate(cholesterol.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
+        Picasso.with(context).load(new File(cholesterol.getbyteArray()))
+                .error(R.drawable.bp)
+                .placeholder(R.drawable.bp).fit()
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgDiary);
         tvDialogBpTime.setText(cholesterol.getTime());
         tvDialogWeightNote.setText(cholesterol.getNote());
-        tvDialogCHdl.setText(cholesterol.getHdl() + "");
-        tvDialogCLdl.setText(cholesterol.getLdl() + "");
-        tvDialogCTotal.setText(cholesterol.getTotal() + "");
-        tvDialogCTriglyceride.setText(cholesterol.getTriglyceride() + "");
+        if (cholesterol.getHdl() != 0)
+            tvDialogCHdl.setText(cholesterol.getHdl() + "");
+        else tvDialogCHdl.setText("--");
+        if (cholesterol.getLdl() != 0)
+            tvDialogCLdl.setText(cholesterol.getLdl() + "");
+        else tvDialogCLdl.setText("--");
+        if (cholesterol.getTotal() != 0)
+            tvDialogCTotal.setText(cholesterol.getTotal() + "");
+        else tvDialogCTotal.setText("--");
+        if (cholesterol.getTriglyceride() != 0)
+            tvDialogCTriglyceride.setText(cholesterol.getTriglyceride() + "");
+        else tvDialogCTriglyceride.setText("--");
         dialog.show();
 
 
@@ -340,13 +363,15 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         MyFontTextView tvDialogBpTime;
         MyFontTextView tvDialogBpSystolic;
         MyFontTextView tvDialogBpDiastolic;
+        ImageView imgDiary;
+
         MyFontTextView tvDialogBpHeartbit;
         MyFontTextView tvDialogBpSPressure;
         MyFontTextView tvDialogBpDPressure;
         MyFontTextView tvDialogWeightNote;
         MyFontButton btnDialogCancel;
         MyFontButton btnDialogEdit;
-
+        imgDiary = (ImageView) dialog.findViewById(R.id.img_for_diary);
         tvDialogBpDate = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_bp_date);
         tvDialogBpTime = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_bp_time);
         tvDialogBpSystolic = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_bp_systolic);
@@ -376,12 +401,22 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         });
 
         BloodPresure bloodPresure = MainActivity.bloodPresureArrayList.get(position);
-        tvDialogBpDate.setText(bloodPresure.getDate());
+        tvDialogBpDate.setText(Util.getFormatedDate(bloodPresure.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
+        Picasso.with(context).load(new File(bloodPresure.getbyteArray()))
+                .error(R.drawable.bp)
+                .placeholder(R.drawable.bp).fit()
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgDiary);
         tvDialogBpTime.setText(bloodPresure.getTime());
         tvDialogWeightNote.setText(bloodPresure.getNote());
-        tvDialogBpSystolic.setText(bloodPresure.getSystolic() + "");
-        tvDialogBpDiastolic.setText(bloodPresure.getDiastolic() + "");
-        tvDialogBpHeartbit.setText(bloodPresure.getHeartrate() + "");
+        if (bloodPresure.getSystolic() != 0)
+            tvDialogBpSystolic.setText(bloodPresure.getSystolic() + "");
+        else tvDialogBpSystolic.setText("--");
+        if (bloodPresure.getDiastolic() != 0)
+            tvDialogBpDiastolic.setText(bloodPresure.getDiastolic() + "");
+        else tvDialogBpDiastolic.setText("--");
+        if (bloodPresure.getHeartrate() != 0)
+            tvDialogBpHeartbit.setText(bloodPresure.getHeartrate() + "");
+        else tvDialogBpHeartbit.setText("--");
         tvDialogBpSPressure.setText("");
         tvDialogBpDPressure.setText("");
         dialog.show();
@@ -397,6 +432,9 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         MyFontTextView tvDialogWeightNote;
         MyFontButton btnDialogCancel;
         MyFontButton btnDialogEdit;
+        ImageView imgDiary;
+
+        imgDiary = (ImageView) dialog.findViewById(R.id.img_for_diary);
         tvDialogGlucoseDate = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_glucose_date);
         tvDialogGlucoseTime = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_glucose_time);
         tvDialogGlucoseGlucose = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_glucose_glucose);
@@ -422,13 +460,28 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
                 startActivity(intent);
             }
         });
+
         Glucose glucose = MainActivity.glucoseArrayList.get(position);
-        tvDialogGlucoseDate.setText(glucose.getDate());
+        tvDialogGlucoseDate.setText(Util.getFormatedDate(glucose.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
+        Picasso.with(context).load(new File(glucose.getbyteArray()))
+                .error(R.drawable.bp)
+                .placeholder(R.drawable.bp).fit()
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgDiary);
         tvDialogGlucoseTime.setText(glucose.getTime());
         tvDialogWeightNote.setText(glucose.getNote());
-        tvDialogGlucoseGlucose.setText(glucose.getGlucose() + "");
+        if (glucose.getGlucose() != 0) {
+            if (phelper.getInteger(AppConstant.GLUCOSE_SELECTED) == AppConstant.GLUCOSE_SELECTED_UNIT_MMOL_PER_L) {
+                tvDialogGlucoseGlucose.setText(glucose.getGlucose() + "");
+            } else {
+                tvDialogGlucoseGlucose.setText(UnitHelper.mmolToMg(Float.parseFloat(glucose.getGlucose() + "")) + "");
+            }
+        } else tvDialogGlucoseGlucose.setText("--");
+
         tvDialogGlucoseType.setText(glucose.getTestingTime());
-        tvDialogGlucoseHba1c.setText(glucose.getHba1c() + "");
+        if (glucose.getHba1c() != 0) {
+            tvDialogGlucoseHba1c.setText(glucose.getHba1c() + "");
+        } else tvDialogGlucoseHba1c.setText("--");
+
         dialog.show();
 
     }
@@ -443,7 +496,9 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
         MyFontTextView tvDialogWeightWaist;
         MyFontTextView tvDialogWeightHip;
         MyFontTextView tvDialogWeightNote;
+        ImageView imgDiary;
 
+        imgDiary = (ImageView) dialog.findViewById(R.id.img_for_diary);
         MyFontButton btnCancel, btnEdit;
         tvDialogWeightDate = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_weight_date);
         tvDialogWeightTime = (MyFontTextView) dialog.findViewById(R.id.tv_dialog_weight_time);
@@ -474,15 +529,58 @@ public class WeightDairyFragment extends Fragment implements AdapterView.OnItemC
             }
         });
         Weight weight = MainActivity.WeightList.get(position);
-        tvDialogWeightDate.setText(weight.getDate());
+        tvDialogWeightDate.setText(Util.getFormatedDate(weight.getDate(), phelper.getInteger(AppConstant.DATE_SELECTED)));
+        Picasso.with(context).load(new File(weight.getbyteArray()))
+                .error(R.drawable.bp)
+                .placeholder(R.drawable.bp).fit()
+                .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgDiary);
         tvDialogWeightTime.setText(weight.getTime());
-        tvDialogWeightWeight.setText(weight.getWeight() + "");
-        tvDialogWeightBmi.setText("");
-        tvDialogWeightFat.setText(weight.getFat() + "");
-        tvDialogWeightAbdomen.setText(weight.getAbdomen() + "");
-        tvDialogWeightWaist.setText(weight.getWaist() + "");
-        tvDialogWeightHip.setText(weight.getHips() + "");
         tvDialogWeightNote.setText(weight.getNote());
+        tvDialogWeightBmi.setText("underWeight");
+
+        //weight
+        if (weight.getWeight() != 0) {
+            float height = dbhelper.getUser(phelper.getInteger(AppConstant.USER_ID)).getHeight() * 100;
+            float bmi = weight.getWeight() / (height * height);
+            Log.i("bmi", bmi + "");
+            tvDialogWeightBmi.setText(bmi + "underWeight");
+            if (phelper.getInteger(AppConstant.WEIGHT_SELECTED) == AppConstant.WEIGHT_SELECTED_UNIT_KG) {
+                tvDialogWeightWeight.setText(weight.getWeight() + "");
+            } else {
+                tvDialogWeightWeight.setText(UnitHelper.kgToLbsConverter(Float.parseFloat(weight.getWeight() + "")) + "");
+            }
+        } else
+            tvDialogWeightWeight.setText("--");
+        //abdomen , waist , hips
+        if (phelper.getInteger(AppConstant.LENGTH_SELECTED) == AppConstant.LENGTH_SELECTED_UNIT_CM) {
+            if (weight.getAbdomen() != 0)
+                tvDialogWeightAbdomen.setText(weight.getAbdomen() + "");
+            else tvDialogWeightAbdomen.setText("--");
+            if (weight.getWaist() != 0)
+                tvDialogWeightWaist.setText(weight.getWaist() + "");
+            else tvDialogWeightWaist.setText("--");
+            if (weight.getHips() != 0)
+                tvDialogWeightHip.setText(weight.getHips() + "");
+            else tvDialogWeightHip.setText("--");
+        } else {
+            if (weight.getAbdomen() != 0)
+                tvDialogWeightAbdomen.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getAbdomen() + "")) + "");
+            else tvDialogWeightAbdomen.setText("--");
+            if (weight.getWaist() != 0)
+                tvDialogWeightWaist.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getWaist() + "")) + "");
+            else tvDialogWeightWaist.setText("--");
+            if (weight.getHips() != 0)
+                tvDialogWeightHip.setText(UnitHelper.cmToInchConverter(Float.parseFloat(weight.getHips() + "")) + "");
+            else tvDialogWeightHip.setText("--");
+        }
+        tvDialogWeightBmi.setText("");
+        //fat
+        if (weight.getFat() != 0)
+            tvDialogWeightFat.setText(weight.getFat() + "");
+        else
+            tvDialogWeightFat.setText("--");
+
+
         dialog.show();
     }
 
